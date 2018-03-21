@@ -1,0 +1,16 @@
+.container
+  .container-title
+    .container-title-item
+      %h2 Новый пользоатель
+  .container-body
+    .new_user
+      = render partial: 'shared/flash'
+      = form_for(@user, url: '/accounts', method: :post) do |f|
+        .form-group
+          = f.label :email, 'email'
+          = f.text_field :email, class: 'form-control', placeholder: 'example@gmail.com'
+        .form-group
+          = f.label :name, 'имя'
+          = f.text_field :name, class: 'form-control', placeholder: 'Сергеев Борис'
+        .form-group
+          = f.submit 'Сохранить', class: 'btn btn-success'

@@ -1,0 +1,4 @@
+%p
+  Привет, #{@user.name || @user.email}!
+%p Добро пожаловать в Miningup Hotel! Перейдите по ссылке, чтобы войти в личный кабинет!
+%p= link_to 'Войти', edit_password_url(@user, reset_password_token: @token)

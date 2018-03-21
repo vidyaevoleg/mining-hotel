@@ -1,0 +1,24 @@
+.container-fluid
+  .container
+    .container-title
+      .container-title-item
+        %h2
+          Отели
+      .container-title-item
+        %button.btn.btn-info
+          %a{href: '/accounts'}
+            пользователи
+      .container-title-item
+        %button.btn.btn-success
+          %a{href: '/accounts/new'}
+            новый пользователь
+    .container-body
+      .places.row
+        - @places.each do |place|
+          .places-card.col-sm-4
+            .places-card-block
+              .places-card-title
+                %a{href: "/places/#{place.id}"}
+                  = place.name
+              .places-card-stats
+                = render partial: 'shared/place_stats', locals: {place: place}

@@ -1,0 +1,57 @@
+.container
+  .container-title
+    .container-title-item
+      %h2 Пользователи
+    .container-title-item
+      %button.btn.btn-success
+        %a{href: '/accounts/new'}
+          новый пользователь
+  .container-body
+    = render partial: 'shared/flash'
+    %table.table.table-considered{:className => ""}
+      %thead.table-info{:className => ""}
+        %th
+          ID
+        %th
+          Email
+        %th
+          Имя
+        %th
+          Кол-во машин
+        %th
+          Создан
+        %th
+          Последний логин
+        %th
+        %th
+        %th
+        %th
+      %tbody
+        - @users.each do |user|
+          %tr
+            %th
+              = user.id
+            %td
+              = user.email
+              - if user.invited?
+                %span.user-invited.text-success приглашен
+            %td
+              = user.name
+            %td
+              = user.machines.count
+            %td
+              = user.created_at
+            %td
+              - if user.current_sign_in_at || user.last_sign_in_at
+                = user.current_sign_in_at || user.last_sign_in_at
+              - else
+                %a.text-success{href: "/accounts/#{user.id}/invite"}
+                  пригласить
+            %td
+              %th
+                %a{href: "/accounts/#{user.id}"}
+                  %i.fa.fa-eye.fa-lg
+            -# %td
+            -#   %th
+            -#     %a{href: "/accounts/#{user.id}/edit"}
+            -#       %i.fa.fa-pencil.fa-lg

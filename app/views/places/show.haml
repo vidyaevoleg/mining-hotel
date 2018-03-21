@@ -1,0 +1,17 @@
+.container-fluid
+  .container
+    .container-title
+      .container-title-item
+        %h2
+          Отель
+          %b
+            #{@place.name}
+      .container-title-item
+        = render partial: 'shared/place_stats', locals: {place: @place}
+
+      .container-title-item
+
+    .container-body
+  #machies_list_admin
+
+= javascript_pack_tag('machies_list_admin')
