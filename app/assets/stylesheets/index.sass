@@ -1,0 +1,45 @@
+body
+  font-family: Helvetica, sans-serif
+  margin: 0
+
+.cont
+  width: 950px
+  margin: auto
+  background: rgba(255, 218, 251, 0.6)
+
+.controls
+  margin: 80px 0 40px
+  display: flex
+  align-items: center
+  h1
+    font-weight: bold
+    margin-right: 32px
+  & > *
+    margin-right: 20px
+  button
+    border: none
+    background: red
+    height: 38px
+    line-height: 38px
+    border-radius: 4px
+    padding: 0 14px
+    color: #fff
+    text-transform: uppercase
+    font-size: 14px
+    cursor: pointer
+    &.edit
+      background: #00CEFD
+    &.reboot
+      background: #068BE0
+
+.t
+  &-row
+    display: flex
+  &-col
+    flex: 1
+    border: 1px solid rgb(152, 149, 255)
+
+.select
+  background: pink
+  width: 160px
+  height: 40px

@@ -15,46 +15,22 @@ export default class MachineListItem extends Component {
     }
 
     return (
-      <tr className={color}>
-        <td>
-          <div className="form-group checkbox-lil">
-            <input type="checkbox" className="form-control" checked={chosen} onChange={onChoose}/>
-          </div>
-        </td>
-        <th>
-          {machine.model}
-        </th>
-        <td>
-          <code>
-            {machine.template && machine.template.url1}
-          </code>
-        </td>
-        <th>
-          <code>
-            {machine.temperatures && machine.temperatures.toLocaleString()}
-          </code>
-        </th>
-        <th>
-          {machine.hashrate}
-        </th>
-        <td>
-          {machine.time}
-        </td>
-        <th>
-        </th>
-        <th>
-        </th>
-        <th>
-          <div className="machines-action">
-            <i className="fa fa-cog" aria-hidden="true" onClick={editConfig}></i>
-          </div>
-          <div className="machines-action">
-            <a href={'/machines/' + machine.id} className="text-info">
-              <i className="fa fa-area-chart" aria-hidden="true"></i>
-            </a>
-          </div>
-        </th>
-      </tr>
+      <div className="t-row">
+        <div className="t-col">
+          <input type="checkbox" checked={chosen} onChange={onChoose}/>
+        </div>
+        <div className="t-col">{machine.model}</div>
+        <div className="t-col">{machine.template && machine.template.url1}</div>
+        <div className="t-col">{machine.temperatures && machine.temperatures.toLocaleString()}</div>
+        <div className="t-col">{machine.hashrate}</div>
+        <div className="t-col">{machine.time}</div>
+        <div className="t-col">
+          <i className="fa fa-cog" aria-hidden="true" onClick={editConfig}></i>
+          <a href={'/machines/' + machine.id} className="text-info">
+            <i className="fa fa-area-chart" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
     )
   }
 }
