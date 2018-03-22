@@ -1,4 +1,4 @@
-class MachinePlaceDecorator < DraperDecorator
+class MachinePlaceDecorator < Draper::Decorator
   delegate_all
 
   def user_email
