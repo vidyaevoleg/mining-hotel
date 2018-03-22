@@ -26,7 +26,7 @@ class AccountsController < ApplicationController
 
   def invite
     Users::Invite.run!(user: @user)
-    flash[:sucees] = 'Пользователь приглашен'
+    flash[:success] = 'Пользователь приглашен'
     redirect_to '/accounts'
   end
 

@@ -19,11 +19,11 @@ class Remote::SaveMachine
 
   def find_or_create
     @machine ||= begin
-      machine = Machine.find_by(system_id: options[:id])
+      machine = Machine.find_by(place_id: options[:place_id], system_id: options[:id])
       _options = {
-        place: options[:place],
         ip: options[:ip],
         serial: options[:serial],
+        place: options[:place],
         model: options[:model],
         system_id: options[:id],
         user_id: options[:user_id],
@@ -33,7 +33,7 @@ class Remote::SaveMachine
       if machine
         machine.update!(_options)
       else
-        machine = Machine.create(_options)
+        machine = Machine.create!(_options)
       end
       machine
     end
@@ -41,7 +41,7 @@ class Remote::SaveMachine
 
   def save_stat
     new_stat = machine.stats.create(
-      temperatures: options[:temparatures],
+      temperatures: options[:temparatures].map(&:to_i),
       active: options[:active],
       success: options[:success],
       hashrate: options[:hashrate]

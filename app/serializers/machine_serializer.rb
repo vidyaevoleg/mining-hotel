@@ -6,7 +6,7 @@ class MachineSerializer < ApplicationSerializer
     :serial,
     :url,
     :hashrate,
-    :temparatures,
+    :temperatures,
     :success,
     :active,
     :time,
@@ -21,8 +21,8 @@ class MachineSerializer < ApplicationSerializer
     @_stat ||= object.stat
   end
 
-  def temparatures
-    stat&.temparatures
+  def temperatures
+    stat&.temperatures.reject {|v| v == 0}
   end
 
   def active
@@ -38,7 +38,7 @@ class MachineSerializer < ApplicationSerializer
   end
 
   def time
-    stat&.created_at&.strftime("%H:%M %d:%m")
+    stat&.created_at&.strftime("%H:%M %d/%m/%y")
   end
 
 end

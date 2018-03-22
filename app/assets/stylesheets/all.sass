@@ -17,27 +17,55 @@ body
   min-width: 500px
 
 .container
-  width: 960px
+  width: 1020px
   margin: auto
   margin-bottom: 50px
   &-flex
     display: flex
-
+  &-title
+    &-item
+      width: 10%
+      max-width: 250px
+      min-width: 200px
+      display: inline-block
+      margin: 20px 20px 20px 0
+      button
+        width: 100%
+        a
+          color: white
+          &:hover
+            color: white
+    &-item.sm
+      max-width: 150px
+      min-width: 100px
+    &-item.md
+      max-width: 200px
+      min-width: 150px
+      button
+        font-size: 14px
 .app
   &-header
     position: relative
     height: 100px
+    background: $lightgray
     &-logo
       width: 100px
       margin: auto
       height: 100%
-      background: yellow
+      a
+        font-size: 30px
+        color: $darkblue
+        text-decoration: none
+        font-weight: bold
     &-user
       width: 200px
       height: 100%
       position: absolute
       top: 0
       right: 0
+      p
+        margin-bottom: 5px
+        font-size: 14px
   &-footer
     background: rgb(187, 62, 174)
     height: 100px
@@ -87,22 +115,8 @@ body
         fill: $darkblue
         g, path
           fill: $darkblue
-.container
-  &-title
-    &-item
-      width: 10%
-      max-width: 250px
-      min-width: 200px
-      display: inline-block
-      margin: 20px 20px 20px 0
-      button
-        width: 100%
-        a
-          color: white
-          &:hover
-            color: white
-  &-body
-    margin-top: 40px
+
+
 .places
   &-card
     padding: 5px
@@ -139,3 +153,31 @@ body
   max-width: 500px
 .user-invited
   font-size: 10px
+.machines
+  &-list
+    .label
+      font-size: 12px
+    thead
+      th, td
+        vertical-align: top !important
+    tbody
+      tr
+        font-size: 14px
+  &-action
+    display: inline-block
+    width: 20px
+    margin: 0 3px 0 3px
+
+.checkbox-big
+  margin-top: 5px
+  input
+    transform: scale(1.5)
+.checkbox-lil
+  input
+    margin-top: 3px
+    transform: scale(1.2)
+
+.table
+  thead
+    th
+      vertical-align: top

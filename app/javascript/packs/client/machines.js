@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import MachineListItem from './machine_list_item';
+import {uniq} from 'lodash';
+import MachineConfigPopup from '../shared/machine_config_popup'
+import RebootingProgress from '../shared/rebooting_progress'
 
 export default class Machines extends Component {
 
@@ -15,10 +18,9 @@ export default class Machines extends Component {
       },
       selectedMachines: [],
       rebootedMachines: [],
-      selectedTemplate: null,
       selectedMachine: null,
       newConfig: null,
-      models: gon.models
+      models: _.uniq(gon.machines.map(m => m.model))
     }
   }
 
@@ -57,7 +59,7 @@ export default class Machines extends Component {
     const {filter, machines} = this.state;
     let filtred = machines;
     for (let key in filter) {
-      if (filter[key] && key == 'model' && filter[key] != 'all') {
+      if (filter[key] && key == 'model' && filter[key] != 'все') {
         filtred = filtred.filter(m => m.model == filter[key])
       }
     }
@@ -99,7 +101,7 @@ export default class Machines extends Component {
         ...this.state.machines,
         machine
       ],
-      selectedTemplate: machine
+      selectedMachine: machine
     })
   }
 
@@ -107,7 +109,6 @@ export default class Machines extends Component {
     this.setState({
       selectedMachines: [],
       selectedMachine: null,
-      selectedTemplate: null,
       newConfig: null,
       rebootedMachines: []
     })
@@ -115,7 +116,7 @@ export default class Machines extends Component {
 
   editConfigHandler = (machine) => {
     this.setState({
-      selectedTemplate: machine
+      selectedMachine: machine
     })
   }
 
@@ -145,32 +146,42 @@ export default class Machines extends Component {
   }
 
   render () {
-    const {templates, selected} = this.state;
-
+    const {templates, selected, models, filter, selectedMachine, selectedMachines, rebootedMachines} = this.state;
     const machines = this.filterMachines();
 
     return (
       <div className="container">
         <div className="container-title">
           <div className="container-title-item">
-            <h3> шаблоны </h3>
+            <h3> Майнеры </h3>
           </div>
-          {
-            templates.map(t => {
-              return (
-                <div className="container-title-item">
-                  <button className="btn btn-info">
-                    {t.name}
-                  </button>
-                </div>
-              )
-            })
-          }
-          <div className="container-title-item">
-            <button className="btn btn-success">
-              новый шаблон
-            </button>
-          </div>
+          {models.length && <div className="container-title-item sm">
+            <div className="form-group">
+              <select value={filter.model} className="form-control" onChange={this.changeSearchHanlder}>
+                <label>модель</label>
+                <option value={null}>все</option>
+                 {models.map(m => {
+                   return (
+                     <option value={m}>{m}</option>
+                   )
+                 })}
+              </select>
+            </div>
+          </div>}
+          {selected && selected.length > 0 && <div className="container-title-item md">
+            <div className="machines-buttons-item">
+              <button className="btn btn-info" onClick={this.editGroupHandler}>
+                редактировать ({selected.length})
+              </button>
+            </div>
+          </div>}
+          {selected && selected.length > 0 && <div className="container-title-item md">
+            <div className="machines-buttons-item">
+              <button className="btn btn-danger" onClick={this.rebootHandler}>
+                перезагрузка ({selected.length})
+              </button>
+            </div>
+          </div>}
         </div>
         <div className="container-body">
           <table className="table table-considered machines-list">
@@ -179,9 +190,6 @@ export default class Machines extends Component {
                 <div className="form-group checkbox-big">
                   <input type="checkbox" className="form-control" checked={selected.length == machines.length} onChange={this.chooseAll}/>
                 </div>
-              </th>
-              <th className="label">
-                место
               </th>
               <th className="label">
                 модель
@@ -196,7 +204,7 @@ export default class Machines extends Component {
                 хэшрейт
               </th>
               <th className="label">
-                обновление
+                последнее обновление
               </th>
               <th>
               </th>
@@ -217,6 +225,16 @@ export default class Machines extends Component {
               }
             </tbody>
           </table>
+          {selectedMachine &&
+            <MachineConfigPopup toogle={this.tooglePopup} machine={selectedMachine} templates={templates} />
+          }
+          {selectedMachines && selectedMachines.length > 0 &&
+            <MachineConfigPopup toogle={this.tooglePopup} machines={selectedMachines} templates={templates}/>
+          }
+          {
+            rebootedMachines && rebootedMachines.length > 0 &&
+            <RebootingProgress toogle={this.tooglePopup} ids={rebootedMachines}/>
+          }
         </div>
       </div>
     )

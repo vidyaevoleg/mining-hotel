@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
-import Machines from './admin/machines'
+import Machines from './client/machines'
 
-class MachinesListAdmin extends Component {
+class MachinesListUser extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -18,7 +18,7 @@ class MachinesListAdmin extends Component {
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <MachinesListAdmin />,
-    document.getElementById('machines_list_admin')
+    <MachinesListUser/>,
+    document.getElementById('machines_list_user')
   )
 })

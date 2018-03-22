@@ -26,6 +26,7 @@
         %th
         %th
         %th
+        %th
       %tbody
         - @users.each do |user|
           %tr
@@ -44,9 +45,9 @@
             %td
               - if user.current_sign_in_at || user.last_sign_in_at
                 = user.current_sign_in_at || user.last_sign_in_at
-              - else
-                %a.text-success{href: "/accounts/#{user.id}/invite"}
-                  пригласить
+            %td
+              %a.text-success{href: "/accounts/#{user.id}/invite"}
+                пригласить
             %td
               %th
                 %a{href: "/accounts/#{user.id}"}

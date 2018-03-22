@@ -1,5 +1,5 @@
 class Stat < ApplicationRecord
-  serialize :temparatures, Array
+  serialize :temperatures, Array
   belongs_to :machine
 
   def created_at
