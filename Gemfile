@@ -27,6 +27,7 @@ gem 'active_interaction', '~> 3.6'
 gem 'phony_rails'
 gem 'config'
 gem 'draper'
+gem 'whenever', require: false
 gem 'friendly_id', '~> 5.1.0'
 gem 'rails-i18n'
 gem 'russian'
