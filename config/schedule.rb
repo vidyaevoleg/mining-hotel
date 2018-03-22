@@ -1,5 +1,3 @@
-job_type :rake, "cd :path && rake :task --silent :output"
-
 every 3.minutes do
   rake "stats:fetch"
 end
