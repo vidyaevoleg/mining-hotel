@@ -24,6 +24,171 @@ export default class Machines extends Component {
     }
   }
 
+
+  render () {
+    const {templates, selected, models, filter, selectedMachine, selectedMachines, rebootedMachines} = this.state;
+    const machines = this.filterMachines();
+
+    return (
+      <div className="cont">
+        <div className="controls">
+          <h1>Майнеры</h1>
+          <div className="select">
+            <select value={filter.model} className="form-control" onChange={this.changeSearchHanlder}>
+              <label>модель</label>
+              <option value={null}>все</option>
+               {models.map(m => (
+                 <option key={m} value={m}>{m}</option>
+               ))}
+            </select>
+          </div>
+          {selected && selected.length > 0 && (
+            <button className="edit" onClick={this.editGroupHandler}>
+              Редактировать ({selected.length})
+            </button>
+          )}
+          {selected && selected.length > 0 && (
+            <button className="reboot" onClick={this.rebootHandler}>
+              Перезагрузка ({selected.length})
+            </button>
+          )}
+        </div>
+        <div className="t">
+          <div className="t-head">
+            <div className="t-row">
+              <div className="t-col">
+                <input type="checkbox" checked={selected.length == machines.length} onChange={this.chooseAll}/>
+              </div>
+              <div className="t-col">Модель</div>
+              <div className="t-col">Инфо</div>
+              <div className="t-col">Температура</div>
+              <div className="t-col">Хэшрейт</div>
+              <div className="t-col">Последнее обновление</div>
+            </div>
+          </div>
+          <div className="t-body">
+            {
+              machines.map(m => {
+                const chosen = selected.includes(m.id);
+                return <MachineListItem
+                  key={m.id}
+                  machine={m}
+                  onChoose={() => {this.chooseMachineHandler(m.id)}}
+                  chosen={chosen}
+                  editConfig={() => this.editConfigHandler(m)}
+                  editMachine={() => this.editMachineHandler(m)}
+                />
+              })
+            }
+          </div>
+        </div>
+        {selectedMachine &&
+          <MachineConfigPopup toogle={this.tooglePopup} machine={selectedMachine} templates={templates} />
+        }
+        {selectedMachines && selectedMachines.length > 0 &&
+          <MachineConfigPopup toogle={this.tooglePopup} machines={selectedMachines} templates={templates}/>
+        }
+        {
+          rebootedMachines && rebootedMachines.length > 0 &&
+          <RebootingProgress toogle={this.tooglePopup} ids={rebootedMachines}/>
+        }
+
+
+        {/* REMOVE  ===================================================================*/}
+        {/* <div className="container">
+          <div className="container-title">
+            <div className="container-title-item">
+              <h3> Майнеры </h3>
+            </div>
+            {models.length && <div className="container-title-item sm">
+              <div className="form-group">
+                <select value={filter.model} className="form-control" onChange={this.changeSearchHanlder}>
+                  <label>модель</label>
+                  <option value={null}>все</option>
+                   {models.map(m => {
+                     return (
+                       <option value={m}>{m}</option>
+                     )
+                   })}
+                </select>
+              </div>
+            </div>}
+            {selected && selected.length > 0 && <div className="container-title-item md">
+              <div className="machines-buttons-item">
+                <button className="btn btn-info" onClick={this.editGroupHandler}>
+                  редактировать ({selected.length})
+                </button>
+              </div>
+            </div>}
+            {selected && selected.length > 0 && <div className="container-title-item md">
+              <div className="machines-buttons-item">
+                <button className="btn btn-danger" onClick={this.rebootHandler}>
+                  перезагрузка ({selected.length})
+                </button>
+              </div>
+            </div>}
+          </div>
+          <div className="container-body">
+            <table className="table table-considered machines-list">
+              <thead>
+                <th width="5%">
+                  <div className="form-group checkbox-big">
+                    <input type="checkbox" className="form-control" checked={selected.length == machines.length} onChange={this.chooseAll}/>
+                  </div>
+                </th>
+                <th className="label">
+                  модель
+                </th>
+                <th className="label">
+                  инфо
+                </th>
+                <th className="label">
+                  температура
+                </th>
+                <th className="label">
+                  хэшрейт
+                </th>
+                <th className="label">
+                  последнее обновление
+                </th>
+                <th>
+                </th>
+              </thead>
+              <tbody>
+                {
+                  machines.map(m => {
+                    const chosen = selected.includes(m.id);
+                    return <MachineListItem
+                      key={m.id}
+                      machine={m}
+                      onChoose={() => {this.chooseMachineHandler(m.id)}}
+                      chosen={chosen}
+                      editConfig={() => this.editConfigHandler(m)}
+                      editMachine={() => this.editMachineHandler(m)}
+                    />
+                  })
+                }
+              </tbody>
+            </table>
+            {selectedMachine &&
+              <MachineConfigPopup toogle={this.tooglePopup} machine={selectedMachine} templates={templates} />
+            }
+            {selectedMachines && selectedMachines.length > 0 &&
+              <MachineConfigPopup toogle={this.tooglePopup} machines={selectedMachines} templates={templates}/>
+            }
+            {
+              rebootedMachines && rebootedMachines.length > 0 &&
+              <RebootingProgress toogle={this.tooglePopup} ids={rebootedMachines}/>
+            }
+          </div>
+        </div> */}
+        {/* REMOVE  ===================================================================*/}
+      </div>
+
+
+    )
+  }
+
   _getJsonFromUrl () {
     const query = window.location.search.substr(1);
     const result = {};
@@ -145,98 +310,4 @@ export default class Machines extends Component {
     })
   }
 
-  render () {
-    const {templates, selected, models, filter, selectedMachine, selectedMachines, rebootedMachines} = this.state;
-    const machines = this.filterMachines();
-
-    return (
-      <div className="container">
-        <div className="container-title">
-          <div className="container-title-item">
-            <h3> Майнеры </h3>
-          </div>
-          {models.length && <div className="container-title-item sm">
-            <div className="form-group">
-              <select value={filter.model} className="form-control" onChange={this.changeSearchHanlder}>
-                <label>модель</label>
-                <option value={null}>все</option>
-                 {models.map(m => {
-                   return (
-                     <option value={m}>{m}</option>
-                   )
-                 })}
-              </select>
-            </div>
-          </div>}
-          {selected && selected.length > 0 && <div className="container-title-item md">
-            <div className="machines-buttons-item">
-              <button className="btn btn-info" onClick={this.editGroupHandler}>
-                редактировать ({selected.length})
-              </button>
-            </div>
-          </div>}
-          {selected && selected.length > 0 && <div className="container-title-item md">
-            <div className="machines-buttons-item">
-              <button className="btn btn-danger" onClick={this.rebootHandler}>
-                перезагрузка ({selected.length})
-              </button>
-            </div>
-          </div>}
-        </div>
-        <div className="container-body">
-          <table className="table table-considered machines-list">
-            <thead>
-              <th width="5%">
-                <div className="form-group checkbox-big">
-                  <input type="checkbox" className="form-control" checked={selected.length == machines.length} onChange={this.chooseAll}/>
-                </div>
-              </th>
-              <th className="label">
-                модель
-              </th>
-              <th className="label">
-                инфо
-              </th>
-              <th className="label">
-                температура
-              </th>
-              <th className="label">
-                хэшрейт
-              </th>
-              <th className="label">
-                последнее обновление
-              </th>
-              <th>
-              </th>
-            </thead>
-            <tbody>
-              {
-                machines.map(m => {
-                  const chosen = selected.includes(m.id);
-                  return <MachineListItem
-                    key={m.id}
-                    machine={m}
-                    onChoose={() => {this.chooseMachineHandler(m.id)}}
-                    chosen={chosen}
-                    editConfig={() => this.editConfigHandler(m)}
-                    editMachine={() => this.editMachineHandler(m)}
-                  />
-                })
-              }
-            </tbody>
-          </table>
-          {selectedMachine &&
-            <MachineConfigPopup toogle={this.tooglePopup} machine={selectedMachine} templates={templates} />
-          }
-          {selectedMachines && selectedMachines.length > 0 &&
-            <MachineConfigPopup toogle={this.tooglePopup} machines={selectedMachines} templates={templates}/>
-          }
-          {
-            rebootedMachines && rebootedMachines.length > 0 &&
-            <RebootingProgress toogle={this.tooglePopup} ids={rebootedMachines}/>
-          }
-        </div>
-      </div>
-    )
-  }
 }
