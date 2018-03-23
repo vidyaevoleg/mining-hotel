@@ -1,9 +1,25 @@
 import React, {Component} from 'react';
+import MachinePopup from './machine_popup';
 
 export default class MachineListItem extends Component {
 
+  constructor (props) {
+    super(props);
+    this.state = {
+      popup: null
+    }
+  }
+
+  tooglePopup = () => {
+    this.setState({
+      popup: !this.state.popup
+    })
+  }
+
   render () {
     const {machine, onChoose, chosen, editMachine, editConfig} = this.props;
+    const {popup} = this.state;
+    const user = gon.users.find(u => u.id == machine.user_id);
 
     let color;
     if (machine.active && machine.success) {
@@ -30,12 +46,18 @@ export default class MachineListItem extends Component {
           {machine.model}
         </th>
         <td>
-          <code>пул:
+          <code>
             {machine.template && machine.template.url1}
           </code>
           <br/>
-          <code>user_id:
-            {machine.user_id}
+          <br/>
+          <code>
+            {user && <b>
+                <a href={'/accounts/' + user.id}>
+                  {user.id + ':' + user.email}
+                </a>
+              </b>
+            }
           </code>
         </td>
         <th>
@@ -61,11 +83,10 @@ export default class MachineListItem extends Component {
             <i className="fa fa-pencil" onClick={editMachine}></i>
           </div>
           <div className="machines-action">
-            <a href={'/machines/' + machine.id} className="text-info">
-              <i className="fa fa-area-chart" aria-hidden="true"></i>
-            </a>
+            <i className="fa fa-area-chart" aria-hidden="true" onClick={this.tooglePopup}></i>
           </div>
         </th>
+        {popup && <MachinePopup toogle={this.tooglePopup} machine={machine} />}
       </tr>
     )
   }

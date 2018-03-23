@@ -24,6 +24,15 @@ class AccountsController < ApplicationController
 
   end
 
+  def show
+    user = User.find(params[:id])
+    machines = Machine.includes(:stat, :user, :template).where(user: user).order(id: :desc)
+    gon.machines = json_collection.new(machines, each_serializer: MachineSerializer)
+    templates = Template.where(user_id: user.id).order(id: :desc)
+    gon.templates = json_collection.new(templates, each_serializer: TemplateSerializer)
+    render template: 'pages/home'
+  end
+
   def invite
     Users::Invite.run!(user: @user)
     flash[:success] = 'Пользователь приглашен'
