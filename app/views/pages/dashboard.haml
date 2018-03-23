@@ -17,8 +17,10 @@
         - @places.each do |place|
           .places-card.col-sm-4
             .places-card-block
+              - css_class = place.success? ? 'text-success' : 'text-danger'
               .places-card-title
-                %a{href: "/places/#{place.id}"}
+                %a{href: "/places/#{place.id}", class: css_class}
                   = place.name
-              .places-card-stats
-                = render partial: 'shared/place_stats', locals: {place: place}
+              - if place.success?
+                .places-card-stats
+                  = render partial: 'shared/place_stats', locals: {place: place}

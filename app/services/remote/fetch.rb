@@ -13,7 +13,7 @@ class Remote::Fetch
         machines = JSON.parse(RestClient.get(url).body)
       rescue
         place.error!
-        return
+        next
       end
       clear(place, machines)
       machines.each do |opt|
