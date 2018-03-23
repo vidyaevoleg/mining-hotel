@@ -23,7 +23,7 @@ class SavingProgress extends Component {
     const {ids, config, current} = this.state;
     const {onError} = this.props;
     const id = ids[current];
-    const success = (res) => {
+    const success = () => {
       if (current + 1 < ids.length) {
         this.setState({
           current: current + 1
@@ -33,7 +33,11 @@ class SavingProgress extends Component {
         window.location.reload();
       }
     }
-    API.machines.updateTemplate({...config, id}, success, onError);
+    const error = (res) => {
+      onError(res);
+      success();
+    }
+    API.machines.updateTemplate({...config, id}, success, error);
   }
 
   render () {

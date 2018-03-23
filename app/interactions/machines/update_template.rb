@@ -19,6 +19,9 @@ module Machines
     integer :freq, default: 0
 
     def execute
+      compose(UpdateTemplateRemote, remote_params)
+      return if invalid?
+
       if template_id && machine.template_id != template_id
         if _template = user.templates.find_by(id: template_id)
         # change template machine_id
@@ -29,7 +32,7 @@ module Machines
       else
         #update_current_template
         @template = set_template
-        errors.merge!(template)
+        errors.merge!(template.errors)
       end
       self
     end
@@ -41,13 +44,22 @@ module Machines
     private
 
     def set_template
-      @_template || = begin
+      @_template ||= begin
         if machine.template
-          _template = machine.template.update(inputs.except(:machine))
+          machine.template.update(inputs.except(:machine, :template_id))
+          _template = machine.template
         else
-          _template = Template.create(inputs)
+          _template = Template.create(inputs.except(:template_id))
         end
         _template
+      end
+    end
+
+    def remote_params
+      if template_id && machine.template_id != template_id && _template = user.templates.find_by(id: template_id)
+        _template.to_params.merge(machine: machine)
+      else
+        inputs.except(:template_id)
       end
     end
 

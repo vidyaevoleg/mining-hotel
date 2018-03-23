@@ -15,8 +15,10 @@ export default {
     password1: '',
     password2: '',
     password3: '',
+    name: '',
     fan: false,
     fan_value: 100,
-    freq: 0
+    freq: 0,
+    template_id: null
   }
 }

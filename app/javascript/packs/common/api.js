@@ -37,6 +37,33 @@ window.objectToFormData = function (object, form, namespace) {
 }
 
 const API = {
+  templates: {
+    index (success) {
+      return Rails.ajax({
+        type: 'GET',
+        url: '/api/templates',
+        success: success
+      })
+    },
+    update (params, success, error) {
+      return Rails.ajax({
+        type: 'PUT',
+        url: '/api/templates/' + params.id,
+        data: objectToFormData({template: params}),
+        success: success,
+        error: error
+      })
+    },
+    create (params, success, error) {
+      return Rails.ajax({
+        type: 'POST',
+        url: '/api/templates',
+        data: objectToFormData({template: params}),
+        success: success,
+        error: error
+      })
+    }
+  },
   machines: {
     update (params, success, error) {
       return Rails.ajax({
@@ -65,30 +92,10 @@ const API = {
         error: error
       })
     },
-    delete (id, success) {
-      return Rails.ajax({
-        type: 'DELETE',
-        url: '/api/machines/' + id,
-        success: success
-      })
-    },
     reboot (id, success, error) {
       return Rails.ajax({
         type: 'PUT',
         url: '/api/machines/' + id + '/reboot',
-        success: success,
-        error: error
-      })
-    },
-    uploadConfig (params, success, error) {
-      return Rails.ajax({
-        type: 'POST',
-        url: '/api/machines/upload_config',
-        errrep: true,
-        data: objectToFormData(params),
-        cache: false,
-        contentType: false,
-        processData: false,
         success: success,
         error: error
       })

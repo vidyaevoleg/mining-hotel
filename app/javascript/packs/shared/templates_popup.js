@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import dums from '../common/dums'
+import Errors from '../shared/errors'
+import cn from 'classnames';
 import API from '../common/api'
-import SavingProgress from './saving_progress'
-import Errors from './errors'
 
 import {
   Modal,
@@ -13,17 +13,15 @@ import {
   Button
 } from 'reactstrap'
 
-class MachineConfigPopup extends Component {
+class TemplatesPopup extends Component {
 
   constructor (props) {
     super(props);
-    const {machine, machines, templates} = props;
-    const template = (machine && machine.template) || dums.templateDum;
+
     this.state = {
-      ids: machine ? [machine.id] : machines.map(m => m.id),
-      template: template,
-      progress: false,
-      errors: null
+      template: props.templates[0] || dums.templateDum,
+      errors: null,
+      saved: false
     }
   }
 
@@ -32,86 +30,99 @@ class MachineConfigPopup extends Component {
     this.setState({
       template: {
         ...this.state.template,
-        [name]: value,
-        template_id: name != 'template_id' ? null : value
+        [name]: value
       },
       errors: null
     })
   }
 
-  header = () => {
-    const {machine, machines} = this.props;
-    let header;
-    if (machines && machines.length) {
-      header = 'Выбрано ' + machines.length + ' майнеров';
-    } else if (machine) {
-      header = 'Майнер # ' + machine.id;
-    } else {
-      header = 'Новый майнер';
-    }
-    return header;
-  }
-
-  onChangeTemplate = (e) => {
-    const {templates} = this.props;
-    const template = templates.find(t => t.id == e.target.value);
-    if (template) {
-      this.setState({
-        template: template
-      })
-    }
-  }
-
-  onSubmitHanlder = () => {
+  onChangeTemplate = (template) => {
     this.setState({
-      progress: true
+      template: template
     })
   }
 
-  onErrorHandler = (e) => {
+  onSubmitHanlder = () => {
+    const {template} = this.state;
+    const {onSuccess} = this.props;
+
+    const success= (res) => {
+      this.setState({
+        saved: true,
+        errors: null
+      })
+      setTimeout(() => {
+        this.setState({
+          saved: false
+        })
+      }, 1000);
+      onSuccess(res);
+    }
+
+    const error = (res) => {
+      this.setState({
+        errors: res.errors
+      })
+    }
+
+    if (template.id) {
+      API.templates.update(template, success, error);
+    } else {
+      API.templates.create(template, success, error);
+    }
+  }
+
+  onAddNewTemplate = () => {
     this.setState({
-      errors: e.errors || {server: ['error']}
+      template: dums.templateDum
     })
   }
 
   render () {
-    const {template, ids, progress, errors} = this.state;
+    const {template, errors, saved} = this.state;
     const {toogle, templates} = this.props;
-    const header = this.header();
+    console.log(errors);
 
     return (
       <Modal isOpen={true} toogle={toogle} size="lg">
         <ModalHeader>
           <h2>
-            {header}
+            Шаблоны
           </h2>
         </ModalHeader>
         <ModalBody>
+          {
+            templates.length > 0 ?
+              <Alert color="info">
+                {
+                  templates.map(temp => {
+                    const active = temp.id == template.id;
+                    return (
+                      <button className={cn('btn', 'btn-warning', {'btn-lg': active})} onClick={() => this.onChangeTemplate(temp)}>
+                        {temp.name}
+                      </button>
+                    )
+                  })
+                }
+                <button className={cn('btn', 'btn-success')} onClick={this.onAddNewTemplate}>
+                  новый шаблон
+                </button>
+              </Alert> :
+              <Alert color="info">
+                <p> У вас пока ни одного шаблона. </p>
+                <p> Шаблон - это набор данных (адрес, воркер, пароль) для подключения майнера к пулу. </p>
+                <p> Сохраняйте их для удобства. </p>
+              </Alert>
+          }
+          {saved && <Alert color="success">
+            Сохранено!
+          </Alert>}
+          <Errors errors={errors} />
           <div className="row">
-            {progress && <SavingProgress config={template} ids={ids} onError={this.onErrorHandler}/>}
-            {
-              templates.length > 0 ? <div className="col-12 form-group">
-                <Alert color="info">
-                  <label>шаблон</label>
-                  <select className="form-control" value={template.id} onChange={this.onChangeTemplate}>
-                    <option value={null}>  </option>
-                    {
-                      templates.map(c => {
-                        return (
-                          <option value={c.id}>{c.name}</option>
-                        )
-                      })
-                    }
-                  </select>
-                </Alert>
-              </div> :
-              <div className="col-12 form-group">
-                <Alert color="info">
-                  <p> у вас пока ни одного шаблона </p>
-                </Alert>
-              </div>
-            }
-            <Errors errors={errors} />
+            <div className="col-12 form-group">
+              <label>Название </label>
+              <input className="form-control" placeholder="Bitcoin Antpool, например" value={template.name} name="name" onChange={this.onChangeFieldHandler}/>
+            </div>
           </div>
           <div className="row">
             <div className="col-4 form-group">
@@ -164,7 +175,7 @@ class MachineConfigPopup extends Component {
                 <label>Custom fan </label>
                 <br/>
                 <input type="checkbox" checked={template.fan}
-                  onChange={(e) => {onChangeFieldHandler({target: {fan: e.target.checked}})}}
+                  onChange={(e) => {this.onChangeFieldHandler({target: {name: 'fan', value: e.target.checked}})}}
                   />
               </div>
             </div>
@@ -193,4 +204,4 @@ class MachineConfigPopup extends Component {
   }
 }
 
-export default MachineConfigPopup;
+export default TemplatesPopup;

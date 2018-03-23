@@ -4,7 +4,7 @@ module Api
     skip_before_action :verify_authenticity_token
     respond_to :json
 
-    def unauthorized
+    def unauthorized!
       render json: {errors: {base: 'wrong access'}}
     end
   end

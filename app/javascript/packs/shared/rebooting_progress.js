@@ -26,7 +26,7 @@ class RebootingProgress extends Component {
   }
 
   start = () => {
-    const {current, ids} = this.state;
+    const {current, ids, errors} = this.state;
     const success = () => {
       if (current + 1 < ids.length) {
         this.setState({
@@ -38,6 +38,7 @@ class RebootingProgress extends Component {
       }
     }
     const error = (res) => {
+      success();
       this.setState({
         errors: res.errors || {server: ['error']}
       })
@@ -56,7 +57,7 @@ class RebootingProgress extends Component {
       <Modal isOpen={true} size="lg">
         <ModalHeader>
           <h2>
-            Ребут
+            Перезагрузка
           </h2>
         </ModalHeader>
         <ModalBody>

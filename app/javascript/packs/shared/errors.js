@@ -8,7 +8,9 @@ export default class Errors extends Component {
 
   render () {
     const {errors} = this.props;
+
     if (!errors) return <div></div>;
+
     return (
       <div className="col-12">
         <Alert color="danger">

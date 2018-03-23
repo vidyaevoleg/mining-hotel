@@ -30,8 +30,12 @@ export default class MachineListItem extends Component {
           {machine.model}
         </th>
         <td>
-          <code>
+          <code>пул:
             {machine.template && machine.template.url1}
+          </code>
+          <br/>
+          <code>user_id:
+            {machine.user_id}
           </code>
         </td>
         <th>

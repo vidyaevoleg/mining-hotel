@@ -1,15 +1,16 @@
 module Api
   class MachinesController < ::Api::ApplicationController
 
+    before_action :check_machine
+
+
     def update_template
-      machine = Machine.find(params[:id])
-      result = Machines::UpdateTemplate.run(template_params.merge(machine: machine))
+      result = ::Machines::UpdateTemplate.run(template_params.merge(machine: @machine))
       respond_with result, serializer: MachineSerializer, location: nil
     end
 
     def reboot
-      machine = Machine.find(params[:id])
-      result = Machines::Reboot.run(machine: machine)
+      result = ::Machines::Reboot.run(machine: @machine)
       respond_with result, serializer: MachineSerializer, location: nil
     end
 
@@ -17,6 +18,13 @@ module Api
 
     def machine_params
       params.require(:machine).permit(:model, :serial, :place, :ip, :user_id)
+    end
+
+    def check_machine
+      @machine = Machine.find(params[:id])
+      unless current_user.admin? || @machine.user_id == current_user.id
+        unauthorized!
+      end
     end
 
     def template_params

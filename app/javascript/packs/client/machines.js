@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import MachineListItem from './machine_list_item';
 import {uniq} from 'lodash';
-import MachineConfigPopup from '../shared/machine_config_popup'
-import RebootingProgress from '../shared/rebooting_progress'
+import MachineConfigPopup from '../shared/machine_config_popup';
+import RebootingProgress from '../shared/rebooting_progress';
+import TemplatesPopup from '../shared/templates_popup';
+import API from '../common/api'
 
 export default class Machines extends Component {
 
@@ -19,6 +21,7 @@ export default class Machines extends Component {
       selectedMachines: [],
       rebootedMachines: [],
       selectedMachine: null,
+      editedTemplate: null,
       newConfig: null,
       models: _.uniq(gon.machines.map(m => m.model))
     }
@@ -26,7 +29,11 @@ export default class Machines extends Component {
 
 
   render () {
-    const {templates, selected, models, filter, selectedMachine, selectedMachines, rebootedMachines} = this.state;
+    const {
+      templates, selected, models, filter,
+      selectedMachine, selectedMachines,
+      rebootedMachines, editedTemplate
+    } = this.state;
     const machines = this.filterMachines();
 
     return (
@@ -92,7 +99,10 @@ export default class Machines extends Component {
           rebootedMachines && rebootedMachines.length > 0 &&
           <RebootingProgress toogle={this.tooglePopup} ids={rebootedMachines}/>
         }
-
+        {
+          editedTemplate &&
+            <TemplatesPopup templates={templates} toogle={this.tooglePopup} onSuccess={this.saveTemplateSuccess}/>
+        }
 
         {/* REMOVE  ===================================================================*/}
         {/* <div className="container">
@@ -208,6 +218,11 @@ export default class Machines extends Component {
         }
       })
     }
+    document.getElementById("js-templates").addEventListener("click", () => {
+      this.setState({
+        editedTemplate: true
+      })
+    })
   }
 
   chooseAll = (e) => {
@@ -218,6 +233,15 @@ export default class Machines extends Component {
     } else {
       this.setState({selected: []});
     }
+  }
+
+  saveTemplateSuccess = (template) => {
+    const success = (res) => {
+      this.setState({
+        templates: res,
+      })
+    }
+    API.templates.index(success);
   }
 
   filterMachines = () => {
@@ -275,6 +299,7 @@ export default class Machines extends Component {
       selectedMachines: [],
       selectedMachine: null,
       newConfig: null,
+      editedTemplate: null,
       rebootedMachines: []
     })
   }

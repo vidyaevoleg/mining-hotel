@@ -7,11 +7,11 @@ export default class MachineListItem extends Component {
 
     let color;
     if (machine.active && machine.success) {
-      color = 'table-success'
+      color = 'text-success'
     } else if (machine.active && !machine.success) {
-      color = 'table-warning'
+      color = 'text-warning'
     } else if (!machine.active) {
-      color = 'table-danger'
+      color = 'text-danger'
     }
 
     return (
@@ -19,7 +19,7 @@ export default class MachineListItem extends Component {
         <div className="t-col">
           <input type="checkbox" checked={chosen} onChange={onChoose}/>
         </div>
-        <div className="t-col">{machine.model}</div>
+        <div className="t-col"><span className={color}>{machine.model}</span></div>
         <div className="t-col">{machine.template && machine.template.url1}</div>
         <div className="t-col">{machine.temperatures && machine.temperatures.toLocaleString()}</div>
         <div className="t-col">{machine.hashrate}</div>

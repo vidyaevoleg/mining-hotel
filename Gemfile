@@ -18,6 +18,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'unicorn'
 gem 'haml-rails', "~> 1.0"
 gem 'gon'
+gem 'jquery-rails'
 gem "font-awesome-rails"
 gem 'active_model_serializers'
 gem 'carrierwave', '~> 1.0'

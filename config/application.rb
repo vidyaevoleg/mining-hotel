@@ -13,7 +13,7 @@ module Hotel
     config.autoload_paths += %W(
       #{config.root}/lib
       #{config.root}/app
-      #{config.root}/app/interactions
+      #{config.root}/app/interactions/
     )
     Settings.reload!
     # config.time_zone = 'Moscow'

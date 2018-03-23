@@ -1,9 +1,11 @@
 class Machine < ApplicationRecord
   belongs_to :user
   belongs_to :stat, optional: true
+  belongs_to :hotel, class_name: Place, foreign_key: :place_id
   has_one :template, dependent: :destroy
   has_many :stats, dependent: :destroy
   validates :place, :model, presence: true
+
 
   enum model: {"D3": 0, "L3": 1, "M3": 2, "S9": 3}
 

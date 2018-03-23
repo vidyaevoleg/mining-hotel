@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
 import MachineListItem from './machine_list_item';
+import {uniq} from 'lodash';
+import MachineConfigPopup from '../shared/machine_config_popup';
+import RebootingProgress from '../shared/rebooting_progress';
+import TemplatesPopup from '../shared/templates_popup';
+import API from '../common/api'
 
 export default class Machines extends Component {
 
@@ -15,10 +20,10 @@ export default class Machines extends Component {
       },
       selectedMachines: [],
       rebootedMachines: [],
-      selectedTemplate: null,
       selectedMachine: null,
+      editedTemplate: null,
       newConfig: null,
-      models: gon.models
+      models: _.uniq(gon.machines.map(m => m.model))
     }
   }
 
@@ -41,6 +46,20 @@ export default class Machines extends Component {
         }
       })
     }
+    document.getElementById("js-templates").addEventListener("click", () => {
+      this.setState({
+        editedTemplate: true
+      })
+    })
+  }
+
+  saveTemplateSuccess = (template) => {
+    const success = (res) => {
+      this.setState({
+        templates: res,
+      })
+    }
+    API.templates.index(success);
   }
 
   chooseAll = (e) => {
@@ -57,7 +76,7 @@ export default class Machines extends Component {
     const {filter, machines} = this.state;
     let filtred = machines;
     for (let key in filter) {
-      if (filter[key] && key == 'model' && filter[key] != 'all') {
+      if (filter[key] && key == 'model' && filter[key] != 'все') {
         filtred = filtred.filter(m => m.model == filter[key])
       }
     }
@@ -109,6 +128,7 @@ export default class Machines extends Component {
       selectedMachine: null,
       selectedTemplate: null,
       newConfig: null,
+      editedTemplate: null,
       rebootedMachines: []
     })
   }
@@ -145,31 +165,37 @@ export default class Machines extends Component {
   }
 
   render () {
-    const {templates, selected} = this.state;
-
+    const {
+      templates, selected, models, filter,
+      selectedMachine, selectedMachines,
+      rebootedMachines, editedTemplate
+    } = this.state;
     const machines = this.filterMachines();
 
     return (
       <div className="container">
-        <div className="container-title">
-          <div className="container-title-item">
-            <h3> шаблоны </h3>
-          </div>
-          {
-            templates.map(t => {
-              return (
-                <div className="container-title-item">
-                  <button className="btn btn-info">
-                    {t.name}
-                  </button>
-                </div>
-              )
-            })
-          }
-          <div className="container-title-item">
-            <button className="btn btn-success">
-              новый шаблон
-            </button>
+        <div className="cont">
+          <div className="controls">
+            <h1>Майнеры</h1>
+            <div className="select">
+              <select value={filter.model} className="form-control" onChange={this.changeSearchHanlder}>
+                <label>модель</label>
+                <option value={null}>все</option>
+                 {models.map(m => (
+                   <option key={m} value={m}>{m}</option>
+                 ))}
+              </select>
+            </div>
+            {selected && selected.length > 0 && (
+              <button className="edit" onClick={this.editGroupHandler}>
+                Редактировать ({selected.length})
+              </button>
+            )}
+            {selected && selected.length > 0 && (
+              <button className="reboot" onClick={this.rebootHandler}>
+                Перезагрузка ({selected.length})
+              </button>
+            )}
           </div>
         </div>
         <div className="container-body">
@@ -217,6 +243,20 @@ export default class Machines extends Component {
               }
             </tbody>
           </table>
+          {selectedMachine &&
+            <MachineConfigPopup toogle={this.tooglePopup} machine={selectedMachine} templates={templates} />
+          }
+          {selectedMachines && selectedMachines.length > 0 &&
+            <MachineConfigPopup toogle={this.tooglePopup} machines={selectedMachines} templates={templates}/>
+          }
+          {
+            rebootedMachines && rebootedMachines.length > 0 &&
+            <RebootingProgress toogle={this.tooglePopup} ids={rebootedMachines}/>
+          }
+          {
+            editedTemplate &&
+              <TemplatesPopup templates={templates} toogle={this.tooglePopup} onSuccess={this.saveTemplateSuccess}/>
+          }
         </div>
       </div>
     )
