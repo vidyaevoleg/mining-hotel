@@ -1,9 +1,24 @@
 import React, {Component} from 'react';
+import MachinePopup from './machine_popup';
 
 export default class MachineListItem extends Component {
 
+  constructor (props) {
+    super(props);
+    this.state = {
+      popup: null
+    }
+  }
+
+  tooglePopup = () => {
+    this.setState({
+      popup: !this.state.popup
+    })
+  }
+
   render () {
     const {machine, onChoose, chosen, editMachine, editConfig} = this.props;
+    const {popup} = this.state;
 
     let color;
     if (machine.active && machine.success) {
@@ -26,10 +41,9 @@ export default class MachineListItem extends Component {
         <div className="t-col">{machine.time}</div>
         <div className="t-col">
           <i className="fa fa-cog" aria-hidden="true" onClick={editConfig}></i>
-          <a href={'/machines/' + machine.id} className="text-info">
-            <i className="fa fa-area-chart" aria-hidden="true"></i>
-          </a>
+          <i className="fa fa-area-chart" aria-hidden="true" onClick={this.tooglePopup}></i>
         </div>
+        {popup && <MachinePopup toogle={this.tooglePopup} machine={machine} />}
       </div>
     )
   }

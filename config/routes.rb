@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :templates
     resources :machines do
+      get :stats, on: :member
       put :update_template, on: :member
       put :reboot, on: :member
       post :save_template, on: :collection

@@ -67,7 +67,7 @@ export default class Machines extends Component {
                 <input type="checkbox" checked={selected.length == machines.length} onChange={this.chooseAll}/>
               </div>
               <div className="t-col">Модель</div>
-              <div className="t-col">Инфо</div>
+              <div className="t-col">Пул</div>
               <div className="t-col">Температура</div>
               <div className="t-col">Хэшрейт</div>
               <div className="t-col">Последнее обновление</div>

@@ -62,6 +62,13 @@ const API = {
         success: success,
         error: error
       })
+    },
+    delete (id, success) {
+      return Rails.ajax({
+        type: 'DELETE',
+        url: '/api/templates/' + id,
+        success: success,
+      })
     }
   },
   machines: {
@@ -98,6 +105,13 @@ const API = {
         url: '/api/machines/' + id + '/reboot',
         success: success,
         error: error
+      })
+    },
+    stats (id, success) {
+      return Rails.ajax({
+        type: 'GET',
+        url: '/api/machines/' + id + '/stats',
+        success: success
       })
     }
   }
