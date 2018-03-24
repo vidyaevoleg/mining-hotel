@@ -38,9 +38,10 @@ export default class MachineListItem extends Component {
           </div>
         </td>
         <td>
-          <a href={'/machines/' + machine.id}>
+            {machine.id}
+        </td>
+        <td>
             {machine.place}
-          </a>
         </td>
         <th>
           {machine.model}

@@ -224,6 +224,9 @@ export default class Machines extends Component {
                 </div>
               </th>
               <th className="label">
+                id
+              </th>
+              <th className="label">
                 место
               </th>
               <th className="label">
