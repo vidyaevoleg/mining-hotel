@@ -43,7 +43,7 @@ export default class Machines extends Component {
           <div className="select">
             <select value={filter.model} className="form-control" onChange={this.changeSearchHanlder}>
               <label>модель</label>
-              <option value={null}>все</option>
+              <option value={null}>Все</option>
                {models.map(m => (
                  <option key={m} value={m}>{m}</option>
                ))}
@@ -63,14 +63,17 @@ export default class Machines extends Component {
         <div className="t">
           <div className="t-head">
             <div className="t-row">
-              <div className="t-col">
-                <input type="checkbox" checked={selected.length == machines.length} onChange={this.chooseAll}/>
+              <div className="t-col t-col-checkbox">
+                <div className="check">
+                  <input id="check-main" type="checkbox" checked={selected.length == machines.length} onChange={this.chooseAll}/>
+                  <label htmlFor="check-main"></label>
+                </div>
               </div>
-              <div className="t-col">Модель</div>
-              <div className="t-col">Инфо</div>
-              <div className="t-col">Температура</div>
-              <div className="t-col">Хэшрейт</div>
-              <div className="t-col">Последнее обновление</div>
+              <div className="t-col t-col-model">Модель</div>
+              <div className="t-col t-col-info">Инфо</div>
+              <div className="t-col t-col-temp">Температура</div>
+              <div className="t-col t-col-hashrate">Хэшрейт</div>
+              <div className="t-col t-col-lastupd">Последнее обновление</div>
             </div>
           </div>
           <div className="t-body">
