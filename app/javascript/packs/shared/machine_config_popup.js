@@ -81,17 +81,15 @@ class MachineConfigPopup extends Component {
 
     return (
       <Modal isOpen={true} toogle={toogle} size="lg">
-        <ModalHeader>
+        <div className="popup">
           <h2>
             {header}
           </h2>
-        </ModalHeader>
-        <ModalBody>
           <div className="row">
             {progress && <SavingProgress config={template} ids={ids} onError={this.onErrorHandler}/>}
             {
               templates.length > 0 ? <div className="col-12 form-group">
-                <Alert color="info">
+                <div className="popup-alert popup-alert-info">
                   <label>шаблон</label>
                   <select className="form-control" value={template.id} onChange={this.onChangeTemplate}>
                     <option value={null}>  </option>
@@ -103,12 +101,12 @@ class MachineConfigPopup extends Component {
                       })
                     }
                   </select>
-                </Alert>
+                </div>
               </div> :
               <div className="col-12 form-group">
-                <Alert color="info">
-                  <p> у вас пока ни одного шаблона </p>
-                </Alert>
+                <div className="popup-alert popup-alert-info">
+                  <p>У вас пока ни одного шаблона </p>
+                </div>
               </div>
             }
             <Errors errors={errors} />
@@ -163,9 +161,13 @@ class MachineConfigPopup extends Component {
               <div className="form-group checkbox-big">
                 <label>Custom fan </label>
                 <br/>
-                <input type="checkbox" checked={template.fan}
+                <div className="check">
+                  <input id="check-machine-config" type="checkbox" checked={template.fan} onChange={(e) => {onChangeFieldHandler({target: {fan: e.target.checked}})}}/>
+                  <label htmlFor="check-machine-config"></label>
+                </div>
+                {/* <input type="checkbox" checked={template.fan}
                   onChange={(e) => {onChangeFieldHandler({target: {fan: e.target.checked}})}}
-                  />
+                  /> */}
               </div>
             </div>
             {
@@ -183,11 +185,11 @@ class MachineConfigPopup extends Component {
              </div>
            </div>
           </div>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={this.onSubmitHanlder}>Сохранить</Button>
-          <Button color="secondary" onClick={toogle}>Отмена</Button>
-        </ModalFooter>
+          <div className="popup-footer">
+            <button className="button button-submit" onClick={this.onSubmitHanlder}>Сохранить</button>
+            <button className="button button-cancel" onClick={toogle}>Отмена</button>
+          </div>
+        </div>
       </Modal>
     )
   }

@@ -71,34 +71,32 @@ class MachinePopup extends Component {
 
     return (
       <Modal isOpen={true} size="lg">
-        <ModalHeader>
+        <div className="popup">
           <h2>
             Майнер #{machine.id}
           </h2>
-        </ModalHeader>
-        <ModalBody>
           <div className="t">
             <div className="t-head">
               <div className="t-row">
-                <div className="t-col">Модель</div>
-                <div className="t-col">Пул</div>
-                <div className="t-col">Температура</div>
-                <div className="t-col">Хэшрейт</div>
-                <div className="t-col">Последнее обновление</div>
+                <div className="t-col t-col-model">Модель</div>
+                <div className="t-col t-col-info">Инфо</div>
+                <div className="t-col t-col-temp">Температура</div>
+                <div className="t-col t-col-hashrate">Хэшрейт</div>
+                <div className="t-col t-col-lastupd">Последнее обновление</div>
               </div>
             </div>
             <div className="t-body">
               <div className="t-row">
-                <div className="t-col"><span>{machine.model}</span></div>
-                <div className="t-col">{machine.template && machine.template.url1}</div>
-                <div className="t-col">{machine.temperatures && machine.temperatures.toLocaleString()}</div>
-                <div className="t-col">{machine.hashrate}</div>
-                <div className="t-col">{machine.time}</div>
+                <div className="t-col t-col-model">{machine.model}</div>
+                <div className="t-col t-col-info">{machine.template && machine.template.url1}</div>
+                <div className="t-col t-col-temp">{machine.temperatures && machine.temperatures.toLocaleString()}</div>
+                <div className="t-col t-col-hashrate">{machine.hashrate}</div>
+                <div className="t-col t-col-lastupd">{machine.time}</div>
               </div>
             </div>
           </div>
-          <div className="col-12">
-            {hashrateStats.length > 0 ? <div className="stats-list">
+          <div>
+            {hashrateStats.length > 0 ? <div className="popup-section stats-list">
               <h3> Хэшрейт </h3>
               <VictoryChart scale={{ x: "time" }} height={300} width={800} theme={VictoryTheme.material}
                 animate={{ duration: 500 }}>
@@ -123,8 +121,8 @@ class MachinePopup extends Component {
                   data={hashrateStats}
                 />
               </VictoryChart>
-            </div> : <div></div>}
-            {temps.length > 0 ? <div className="stats-list">
+            </div> : null}
+            {temps.length > 0 ? <div className="popup-section stats-list">
               <h3> Температура чипов </h3>
               <VictoryChart scale={{ x: "time" }} height={300} width={800} theme={VictoryTheme.material}
                 animate={{ duration: 500 }}>
@@ -154,12 +152,12 @@ class MachinePopup extends Component {
                   )
                 })}
               </VictoryChart>
-            </div> : <div></div>}
+            </div> : null}
           </div>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="secondary" onClick={toogle}>Отмена</Button>
-        </ModalFooter>
+          <div className="popup-footer">
+            <button className="button button-cancel" onClick={toogle}>Отмена</button>
+          </div>
+        </div>
       </Modal>
     )
   }
