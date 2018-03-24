@@ -12,16 +12,14 @@ export default class Errors extends Component {
     if (!errors) return <div></div>;
 
     return (
-      <div className="col-12">
-        <Alert color="danger">
-          <ul>
-            {Object.keys(errors).map((k) => {
-              return (
-                <li> {k} {errors[k].toLocaleString()} </li>
-              )
-            })}
-          </ul>
-        </Alert>
+      <div className="popup-alert popup-alert-danger">
+        <ul>
+          {Object.keys(errors).map((k) => {
+            return (
+              <li> {k} {errors[k].toLocaleString()} </li>
+            )
+          })}
+        </ul>
       </div>
     )
   }

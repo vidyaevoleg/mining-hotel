@@ -1,6 +1,12 @@
+@import url("https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic-ext")
+
 body
-  font-family: Helvetica, sans-serif
+  font-family: 'PT Sans', sans-serif
   margin: 0
+
+button,
+input
+  font-family: 'PT Sans', sans-serif
 
 .cont
   width: 950px
@@ -184,3 +190,46 @@ body
 
 .check input[type="checkbox"]:checked + label:after
   opacity: 1
+
+
+.popup
+  padding: 20px
+  h2
+    font-size: 50px
+  &-alert
+    padding: 10px
+    text-align: center
+    text-transform: uppercase
+    color: #292929
+    font-size: 14px
+    margin: 20px 0
+    p
+      margin: 0
+      line-height: 28px
+    &-info
+      background: #D1ECF1
+      color: #015261
+    &-danger
+      background: #f8d7da
+      color: #721c24
+  label
+    text-transform: uppercase
+  &-footer
+    margin-top: 30px
+    text-align: right
+    button:first-child
+      margin-right: 16px
+
+.button
+  height: 38px
+  line-height: 38px
+  padding: 0 16px
+  border-radius: 4px
+  border: none
+  color: #fff
+  font-size: 14px
+  text-transform: uppercase
+  &-cancel
+    background: #515151
+  &-submit
+    background: #068BE0
