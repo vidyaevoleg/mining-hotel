@@ -162,7 +162,7 @@ class MachineConfigPopup extends Component {
                 <label>Custom fan </label>
                 <br/>
                 <div className="check">
-                  <input id="check-machine-config" type="checkbox" checked={template.fan} onChange={(e) => {onChangeFieldHandler({target: {fan: e.target.checked}})}}/>
+                  <input id="check-machine-config" type="checkbox" checked={template.fan} onChange={(e) => {this.onChangeFieldHandler({target: {name: 'fan', value: e.target.checked}})}}/>
                   <label htmlFor="check-machine-config"></label>
                 </div>
                 {/* <input type="checkbox" checked={template.fan}
