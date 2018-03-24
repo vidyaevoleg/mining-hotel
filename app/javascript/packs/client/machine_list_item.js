@@ -1,9 +1,24 @@
 import React, {Component} from 'react';
+import MachinePopup from './machine_popup';
 
 export default class MachineListItem extends Component {
 
+  constructor (props) {
+    super(props);
+    this.state = {
+      popup: null
+    }
+  }
+
+  tooglePopup = () => {
+    this.setState({
+      popup: !this.state.popup
+    })
+  }
+
   render () {
     const {machine, onChoose, chosen, editMachine, editConfig} = this.props;
+    const {popup} = this.state;
 
     let status = '';
     if (machine.active && machine.success) {
@@ -35,6 +50,7 @@ export default class MachineListItem extends Component {
             </a>
           </div>
         </div>
+        {popup && <MachinePopup toogle={this.tooglePopup} machine={machine} />}
       </div>
     )
   }

@@ -9,6 +9,11 @@ module Api
       respond_with result, serializer: MachineSerializer, location: nil
     end
 
+    def stats
+      stats = @machine.stats.order(id: :desc).limit(200)
+      respond_with stats, each_serializer: StatSerializer
+    end
+
     def reboot
       result = ::Machines::Reboot.run(machine: @machine)
       respond_with result, serializer: MachineSerializer, location: nil

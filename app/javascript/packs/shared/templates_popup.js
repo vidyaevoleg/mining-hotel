@@ -72,6 +72,14 @@ class TemplatesPopup extends Component {
     }
   }
 
+  deleteTemplate = (id) => {
+    const {onSuccess} = this.props;
+    const success = () => {
+      onSuccess();
+    }
+    API.templates.delete(id, success);
+  }
+
   onAddNewTemplate = () => {
     this.setState({
       template: dums.templateDum
@@ -94,19 +102,26 @@ class TemplatesPopup extends Component {
           {
             templates.length > 0 ?
               <Alert color="info">
-                {
-                  templates.map(temp => {
-                    const active = temp.id == template.id;
-                    return (
-                      <button className={cn('btn', 'btn-warning', {'btn-lg': active})} onClick={() => this.onChangeTemplate(temp)}>
-                        {temp.name}
-                      </button>
-                    )
-                  })
-                }
-                <button className={cn('btn', 'btn-success')} onClick={this.onAddNewTemplate}>
-                  новый шаблон
-                </button>
+                <div className="row">
+                  {
+                    templates.map(temp => {
+                      const active = temp.id == template.id;
+                      return (
+                        <div className="col-xs-3">
+                          <button className={cn('btn', 'btn-warning', {'btn-lg': active})} onClick={() => this.onChangeTemplate(temp)}>
+                            {temp.name}
+                          </button>
+                          <i className="fa fa-times text-danger" aria-hidden="true" onClick={() => this.deleteTemplate(temp.id)}></i>
+                        </div>
+                      )
+                    })
+                  }
+                  <div className="col-xs-3">
+                    <button className={cn('btn', 'btn-success')} onClick={this.onAddNewTemplate}>
+                      новый шаблон
+                    </button>
+                  </div>
+                </div>
               </Alert> :
               <Alert color="info">
                 <p> У вас пока ни одного шаблона. </p>

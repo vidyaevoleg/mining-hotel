@@ -14,9 +14,11 @@ export default class Machines extends Component {
     this.state = {
       machines: gon.machines,
       templates: gon.templates,
+      users: gon.users,
       selected: [],
       filter: {
-        model: null
+        model: null,
+        user_id: null
       },
       selectedMachines: [],
       rebootedMachines: [],
@@ -78,6 +80,9 @@ export default class Machines extends Component {
     for (let key in filter) {
       if (filter[key] && key == 'model' && filter[key] != 'все') {
         filtred = filtred.filter(m => m.model == filter[key])
+      }
+      if (filter[key] && key == 'user_id' && filter[key] != 'все') {
+        filtred = filtred.filter(m => m.user_id == filter[key])
       }
     }
     return filtred;
@@ -155,20 +160,22 @@ export default class Machines extends Component {
   }
 
   changeSearchHanlder = (e) => {
-    const model = e.target.value;
-    window.history.pushState({}, '', '?model=' + model)
+    const {name, value} = e.target;
+    const {filter} = this.state;
     this.setState({
       filter: {
-        model
+        ...this.state.filter,
+        [name]: value
       }
     })
+    window.history.pushState({}, '', '?' + name + '=' + value);
   }
 
   render () {
     const {
       templates, selected, models, filter,
       selectedMachine, selectedMachines,
-      rebootedMachines, editedTemplate
+      rebootedMachines, editedTemplate, users
     } = this.state;
     const machines = this.filterMachines();
 
@@ -178,11 +185,21 @@ export default class Machines extends Component {
           <div className="controls">
             <h1>Майнеры</h1>
             <div className="select">
-              <select value={filter.model} className="form-control" onChange={this.changeSearchHanlder}>
-                <label>модель</label>
+              <label>модель</label>
+              <select value={filter.model} name="model" className="form-control" onChange={this.changeSearchHanlder}>
                 <option value={null}>все</option>
                  {models.map(m => (
                    <option key={m} value={m}>{m}</option>
+                 ))}
+              </select>
+            </div>
+            <div className="select">
+              <label>юзер</label>
+              <select value={filter.user_id} className="form-control" name="user_id" onChange={this.changeSearchHanlder}>
+                <label>юзер</label>
+                <option value={null}>все</option>
+                 {users.map(u => (
+                   <option key={u.id} value={u.id}>{u.id + ':' + u.email}</option>
                  ))}
               </select>
             </div>

@@ -10,7 +10,8 @@
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "reactstrap": "^5.0.0-alpha.4"
+    "reactstrap": "^5.0.0-alpha.4",
+    "victory": "^0.24.5"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
