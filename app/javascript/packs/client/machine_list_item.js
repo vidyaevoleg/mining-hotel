@@ -45,9 +45,7 @@ export default class MachineListItem extends Component {
           {machine.time}
           <div className="t-col-controls">
             <i className="fa fa-cog" aria-hidden="true" onClick={editConfig}></i>
-            <a href={'/machines/' + machine.id} className="text-info">
-              <i className="fa fa-area-chart" aria-hidden="true"></i>
-            </a>
+            <i className="fa fa-area-chart" aria-hidden="true" onClick={this.tooglePopup}></i>
           </div>
         </div>
         {popup && <MachinePopup toogle={this.tooglePopup} machine={machine} />}
