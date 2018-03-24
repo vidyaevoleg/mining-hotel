@@ -98,25 +98,21 @@ class TemplatesPopup extends Component {
         {
           templates.length > 0 ?
             <div className="popup-alert popup-alert-info">
-              <div className="row">
+              <div className="templates">
                 {
                   templates.map(temp => {
                     const active = temp.id == template.id;
                     return (
-                      <div className="col-xs-3">
-                        <button className={cn('btn', 'btn-warning', {'btn-lg': active})} onClick={() => this.onChangeTemplate(temp)}>
-                          {temp.name}
-                        </button>
-                        <i className="fa fa-times text-danger" aria-hidden="true" onClick={() => this.deleteTemplate(temp.id)}></i>
+                      <div className={`template ${active ? 'template-active' : ''}`} onClick={() => this.onChangeTemplate(temp)}>
+                        {temp.name}
+                        <div className="template-close" onClick={() => this.deleteTemplate(temp.id)}>✕</div>
                       </div>
                     )
                   })
                 }
-                <div className="col-xs-3">
-                  <button className={cn('btn', 'btn-success')} onClick={this.onAddNewTemplate}>
-                    новый шаблон
-                  </button>
-                </div>
+                <button className="templates-new button button-submit" onClick={this.onAddNewTemplate}>
+                  НОВЫЙ ШАБЛОН
+                </button>
               </div>
             </div> :
             <div>
