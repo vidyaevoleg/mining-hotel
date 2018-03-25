@@ -41,7 +41,7 @@ class Remote::SaveMachine
 
   def save_stat
     new_stat = machine.stats.create!(
-      temperatures: options[:temparatures].map(&:to_i),
+      temperatures: options[:temparatures]&.map(&:to_i) || [],
       active: options[:active],
       success: options[:success],
       hashrate: options[:hashrate],
