@@ -14,7 +14,6 @@ class Remote::SaveBlocksStat
     if machine.block_stats.any?
       pool = machine.template&.url1 || BlockStat.unknown_key
       known_block_stat = machine.block_stats.find_by(pool: pool)
-      byebug
       last_actual_stat = machine.stats.order(id: :asc).where(success: true).last
       if last_actual_stat.blocks_count < stat.blocks_count
         #we found some new block
