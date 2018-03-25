@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180321171944) do
+ActiveRecord::Schema.define(version: 20180325105218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "block_stats", force: :cascade do |t|
+    t.string "pool"
+    t.integer "count", default: 0
+    t.bigint "machine_id"
+    t.index ["machine_id"], name: "index_block_stats_on_machine_id"
+  end
 
   create_table "machines", force: :cascade do |t|
     t.integer "model", default: 0
@@ -51,6 +58,7 @@ ActiveRecord::Schema.define(version: 20180321171944) do
     t.bigint "machine_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "blocks_count", default: 0
     t.index ["machine_id"], name: "index_stats_on_machine_id"
   end
 
