@@ -22,7 +22,7 @@ class MachineSerializer < ApplicationSerializer
   end
 
   def temperatures
-    stat&.temperatures.reject {|v| v == 0}
+    stat&.temperatures&.reject {|v| v == 0} || []
   end
 
   def active
