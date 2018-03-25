@@ -17,7 +17,6 @@ class Remote::SaveBlocksStat
       last_actual_stat = machine.stats.where(success: true).where.not(id: stat.id).order(id: :desc).limit(1).first
       if last_actual_stat&.blocks_count.to_i < stat.blocks_count
         #we found some new block
-        byebug
         diff = stat.blocks_count - last_actual_stat.blocks_count
         if known_block_stat
           known_block_stat.update!(count: known_block_stat.count + diff)
@@ -29,5 +28,4 @@ class Remote::SaveBlocksStat
       machine.block_stats.create(count: stat.blocks_count, pool: BlockStat.unknown_key)
     end
   end
-
 end

@@ -1,13 +1,35 @@
+- models = place.machines.pluck(:model).uniq
 .place-stats
   .stat
     .sq.suc
     %span.value
       = place.success_count
+    %span
+      %ul
+        - models.each do |m|
+          - model_count = place.machines.where(model: m).find_all {|m| m.stat.success? && m.stat.active?}.count
+          - if model_count > 0
+            %li
+              #{m} - #{model_count}
   .stat
     .sq.warn
     %span.value
       = place.warning_count
+    %span
+      %ul
+        - models.each do |m|
+          - model_count = place.machines.where(model: m).find_all {|m| m.stat.active? && !m.stat.success? }.count
+          - if model_count > 0
+            %li
+              #{m} - #{model_count}
   .stat
     .sq.err
     %span.value
       = place.error_count
+    %span
+      %ul
+        - models.each do |m|
+          - model_count = place.machines.where(model: m).find_all {|m| !m.stat.active?}.count
+          - if model_count > 0
+            %li
+              #{m} - #{model_count}

@@ -10,7 +10,7 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    @places = Place.all
+    @places = Place.includes(machines: :stat).all
   end
 
   def account
