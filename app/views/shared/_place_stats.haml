@@ -7,7 +7,7 @@
     %span
       %ul
         - models.each do |m|
-          - model_count = place.machines.where(model: m).find_all {|m| m.stat.success? && m.stat.active?}.count
+          - model_count = place.machines.where(model: m).find_all {|m| m.stat && m.stat.success? && m.stat.active?}.count
           - if model_count > 0
             %li
               #{m} - #{model_count}
@@ -18,7 +18,7 @@
     %span
       %ul
         - models.each do |m|
-          - model_count = place.machines.where(model: m).find_all {|m| m.stat.active? && !m.stat.success? }.count
+          - model_count = place.machines.where(model: m).find_all {|m| m.stat && m.stat.active? && !m.stat.success? }.count
           - if model_count > 0
             %li
               #{m} - #{model_count}
@@ -29,7 +29,7 @@
     %span
       %ul
         - models.each do |m|
-          - model_count = place.machines.where(model: m).find_all {|m| !m.stat.active?}.count
+          - model_count = place.machines.where(model: m).find_all {|m| m.stat !m.stat.active?}.count
           - if model_count > 0
             %li
               #{m} - #{model_count}
