@@ -97,7 +97,7 @@ class TemplatesPopup extends Component {
         <h2>Шаблоны</h2>
         {
           templates.length > 0 ?
-            <div className="popup-alert popup-alert-info">
+            <div className="popup-alert popup-alert-info" style={{paddingBottom: 0}}>
               <div className="templates">
                 {
                   templates.map(temp => {
@@ -127,9 +127,7 @@ class TemplatesPopup extends Component {
               <br/>
             </div>
         }
-        {saved && <Alert color="success">
-          Сохранено!
-        </Alert>}
+        {saved && <div className="popup-alert popup-alert-success">Сохранено!</div>}
         <Errors errors={errors} />
         <div className="row">
           <div className="col-12 form-group">
