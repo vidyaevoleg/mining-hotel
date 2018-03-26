@@ -1,9 +1,10 @@
 .header
   .cont
     .header-logo
-      = image_tag('logo.svg')
-      .header-logo-hotel
-        hotel
+      %a{href: "/"}
+        = image_tag('logo.svg')
+        .header-logo-hotel
+          hotel
     .header-controls
       - if current_user
         .header-controls-email
