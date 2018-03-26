@@ -11,6 +11,7 @@ class Remote::SaveBlocksStat
   end
 
   def call
+    return unless (stat.success? && stat.active?)
     if machine.block_stats.any?
       pool = machine.template&.url1 || BlockStat.unknown_key
       known_block_stat = machine.block_stats.find_by(pool: pool)
