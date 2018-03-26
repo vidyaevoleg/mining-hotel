@@ -14,7 +14,7 @@ class Remote::SaveBlocksStat
     if machine.block_stats.any?
       pool = machine.template&.url1 || BlockStat.unknown_key
       known_block_stat = machine.block_stats.find_by(pool: pool)
-      last_actual_stat = machine.stats.where(success: true).where.not(id: stat.id).order(id: :desc).limit(1).first
+      last_actual_stat = machine.stats.where(success: true, active: true).where.not(id: stat.id).order(id: :desc).limit(1).first
       if last_actual_stat&.blocks_count.to_i < stat.blocks_count
         #we found some new block
         diff = stat.blocks_count - last_actual_stat&.blocks_count.to_i
