@@ -13,6 +13,10 @@ class PagesController < ApplicationController
     @places = Place.includes(machines: :stat).all
   end
 
+  def stats
+    render csv: BlockStatDecorator.to_csv(user: current_user), filename: "Blocks #{Time.zone.now.to_s}"
+  end
+
   def account
   end
 

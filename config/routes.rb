@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'pages#home'
   get '/dashboard', to: 'pages#dashboard'
   get '/home', to: 'pages#home'
+  get 'pages/stats', to: 'pages#stats'
   resources :accounts do
     get :invite, on: :member
   end
