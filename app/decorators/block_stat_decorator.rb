@@ -12,7 +12,7 @@ class BlockStatDecorator < Draper::Decorator
 
   def stats
     @stats ||= begin
-      BlockStat.includes(:machine).where("machines.user_id = ?", user.id).references(:machines).map do |bs|
+      BlockStat.includes(machine: :hotel).where("machines.user_id = ?", user.id).references(:machines).map do |bs|
         Stat.new(bs)
       end.sort_by {|s| s.count}.reverse
     end
