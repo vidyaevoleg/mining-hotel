@@ -31,6 +31,7 @@ class BlockStatDecorator < Draper::Decorator
       [
         ['Machine hotel', machine.hotel.name],
         ['Machine place', machine.place],
+        ['Machine model', machine.model],
         ['Machine mac', machine.serial],
         ['Pool', stat.pool],
         ['Blocks count', count]
