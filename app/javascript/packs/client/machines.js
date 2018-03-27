@@ -43,7 +43,7 @@ export default class Machines extends Component {
           <div className="select">
             <select value={filter.model} className="form-control" onChange={this.changeSearchHanlder}>
               <label>модель</label>
-              <option value={null}>Все</option>
+              <option value={null}>все</option>
                {models.map(m => (
                  <option key={m} value={m}>{m}</option>
                ))}
