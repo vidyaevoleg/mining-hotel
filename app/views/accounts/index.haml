@@ -33,7 +33,8 @@
             %th
               = user.id
             %td
-              = user.email
+              %a{href: "/accounts/#{user.id}"}
+                = user.email
               - if user.invited?
                 %span.user-invited.text-success приглашен
             %td
