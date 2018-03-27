@@ -9,7 +9,7 @@
           %label Новый пароль
           - if @minimum_password_length
             %em
-              (#{@minimum_password_length} characters minimum)
+              (минимум #{@minimum_password_length} символом)
           = f.password_field :password, autofocus: true, autocomplete: "off", class: 'form-control'
         .login-section-input
           %label Подтвердите новый пароль
