@@ -1,11 +1,23 @@
-.app-login
-  %h2 Забыли пароль?
-  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-    = devise_error_messages!
-    .field.form-group
-      %label email
-      %br/
-      = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
-    .actions
-      = f.submit "Выслать инструкцию на почту", class: 'btn btn-success'
-  = render partial: 'devise/shared/links'
+.login
+  .cont
+    %h1 Забыли пароль?
+    .login-section
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+        = devise_error_messages!
+        .login-section-input
+          %label email
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+        = f.submit "Выслать инструкцию на почту"
+      = render partial: 'devise/shared/links'
+
+-# .app-login
+-#   %h2 Забыли пароль?
+-#   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+-#     = devise_error_messages!
+-#     .field.form-group
+-#       %label email
+-#       %br/
+-#       = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+-#     .actions
+-#       = f.submit "Выслать инструкцию на почту", class: 'btn btn-success'
+-#   = render partial: 'devise/shared/links'
