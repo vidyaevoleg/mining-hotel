@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
-  before_action :check_regular, only: :home
-  before_action :check_admin, except: :home
-
+  before_action :check_regular, only: [:home]
+  before_action :check_admin, except: [:home, :landing]
+  skip_before_action :authenticate_user!, only: :landing
   def home
     machines = Machine.includes(:stat, :user, :template).where(user: current_user).order(id: :desc)
     gon.machines = json_collection.new(machines, each_serializer: MachineSerializer)
@@ -11,6 +11,10 @@ class PagesController < ApplicationController
 
   def dashboard
     @places = Place.includes(machines: :stat).all
+  end
+
+  def landing
+    @login_url = '/home'
   end
 
   def stats

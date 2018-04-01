@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
   before_action :process_params
+  before_action :set_head_path
 
   private
 
@@ -17,6 +18,10 @@ class ApplicationController < ActionController::Base
       prms[key] = nil unless val.present?
       set_blanc_values_to_nil!(val) if val.is_a? Hash
     end
+  end
+
+  def set_head_path
+    @head_path = current_user ? '/home' : '/'
   end
 
   def process_params
