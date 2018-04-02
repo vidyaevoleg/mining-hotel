@@ -72,6 +72,9 @@ export default class MachineListItem extends Component {
         <td>
           {machine.time}
         </td>
+        <td>
+          {machine.blocks_count}
+        </td>
         <th>
         </th>
         <th>
