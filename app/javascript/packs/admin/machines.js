@@ -86,20 +86,35 @@ export default class Machines extends Component {
         filtred = filtred.filter(m => m.user_id == filter[key])
       }
     }
+
     if (filter.sort == 'status') {
-      filtred.sort((a, b) => { return (a.active === b.active)? 0 : !a.active? -1 : 1})
+      filtred = filtred.sort((a, b) => {
+        if (a.active === b.active) {
+          return a.id > b.id ? -1 : 1;
+        } else {
+          if (a.active && !b.active) {
+            return 1;
+          } else {
+            return -1;
+          }
+        }
+      })
     }
     if (filter.sort == 'place') {
-      filtred.sort((x, y) => {
+      filtred = filtred.sort((x, y) => {
         const xSum = parseInt(x.place.split('-').map(a => parseInt(a)).join(''));
         const ySum = parseInt(y.place.split('-').map(a => parseInt(a)).join(''));
         return xSum < ySum ? -1 : 1
-      })
+      });
     }
     if (filter.sort == 'blocks') {
-      filtred.sort((x, y) => {
-        return x.blocks_count > y.blocks_count ? -1 : 1
-      })
+      filtred = filtred.sort((x, y) => {
+        const xSum = x.blocks_count;
+        const ySum = y.blocks_count;
+        if (xSum == ySum) {
+          return x.id > y.id ? -1 : 1;
+        } else return xSum > ySum ? -1 : 1;
+      });
     }
     return filtred;
   }
@@ -209,7 +224,6 @@ export default class Machines extends Component {
       <div className="container">
         <div className="cont">
           <div className="controls">
-            <h1>Майнеры</h1>
             <div className="select">
               <label>модель</label>
               <select value={filter.model} name="model" className="form-control" onChange={this.changeSearchHanlder}>
