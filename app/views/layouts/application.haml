@@ -24,8 +24,8 @@
     = Gon::Base.render_data
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     = render partial: 'shared/header'
     = yield
     = render partial: 'shared/footer'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'

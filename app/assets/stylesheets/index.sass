@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic-ext")
 
+$err: rgb(237, 75, 89)
+
 body
   font-family: 'PT Sans', sans-serif
   margin: 0
@@ -11,6 +13,433 @@ input
 .cont
   width: 950px
   margin: auto
+
+button.apply
+  width: 280px
+  height: 56px
+  background: #068BE0
+  color: #fff
+  font-size: 20px
+  border-radius: 3px
+  border: none
+  text-transform: uppercase
+  display: block
+
+section#head
+  background: #17212A
+  color: #fff
+  margin-top: 100px
+  padding: 40px 0
+  position: relative
+  .bg-blur
+    position: absolute
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    background-size: cover
+    background-repeat: no-repeat
+    background-position: center
+    background-image: image-url('head_blur.png')
+  .cont
+    position: relative
+    background-size: cover
+    background-repeat: no-repeat
+    background-position: center
+    background-image: image-url('head_image.png')
+  .head
+    z-index: 3
+    display: flex
+    &-miners
+      width: 420px
+      height: 420px
+      margin-right: 40px
+      position: relative
+      &-lay
+        width: 324px
+        height: 324px
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        margin: auto
+        &-1
+          transform: rotate(57deg)
+          background: #8DE7FF
+          opacity: .23
+        &-2
+          transform: rotate(35deg)
+          background: #068BE0
+          opacity: .59
+      &-image
+        position: absolute
+        width: 180px
+        height: 180px
+        img
+          display: block
+          width: 100%
+          margin: auto
+        &-1
+          top: 7px
+          right: 62px
+        &-2
+          bottom: 75px
+          right: 0
+        &-3
+          bottom: -35px
+          left: 45px
+        &-4
+          top: 67px
+          left: 4px
+    &-content
+      flex: 1
+      h1
+        font-size: 44px
+        font-size: normal
+        margin: 0 0 20px
+        span
+          color: #2CCFFB
+      h2
+        font-size: 28px
+        font-weight: normal
+        margin: 0 0 50px
+        span
+          position: relative
+          white-space: nowrap
+          &:after
+            content: ''
+            position: absolute
+            width: 114px
+            height: 6px
+            bottom: -10px
+            right: 4px
+            background-image: image-url('line.svg')
+            background-size: 100%
+            background-repeat: no-repeat
+      p
+        font-size: 18px
+
+section#features
+  background: #fff
+  padding: 64px 0
+  h2
+    font-size: 50px
+    font-weight: normal
+    text-align: center
+    position: relative
+    margin: 0 0 45px
+    color: #292929
+    &:after
+      position: absolute
+      content: ''
+      width: 100px
+      height: 8px
+      background: #E4E4E4
+      bottom: -29px
+      left: 0
+      right: 0
+      margin: auto
+  p
+    color: #292929
+    font-weight: normal
+    font-size: 28px
+    margin: 0 0 62px
+    text-align: center
+  .features
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+    &-item
+      width: 29%
+      display: flex
+      margin-bottom: 50px
+      &-count
+        font-size: 64px
+        color: #FFA800
+        margin-right: 8px
+        line-height: 1em
+      &-text
+        font-size: 14px
+        color: #292929
+        line-height: 1em
+  button
+    margin: auto
+
+section#steps
+  background-color: #6AC5FF
+  background-image: image-url('btc_bg.png')
+  background-position: center
+  background-size: cover
+  padding: 62px 0
+  color: #fff
+  h2
+    font-size: 50px
+    font-weight: normal
+    text-align: center
+    margin: 0 0 45px
+  .steps
+    padding: 0 135px
+    &-item
+      display: flex
+      margin-bottom: 40px
+      align-items: center
+      &-icon
+        width: 114px
+        margin-right: 40px
+      &-text
+        font-size: 18px
+        line-height: 1em
+
+section#calc
+  background: #152E3C
+  padding: 80px 0
+  color: #fff
+  h2
+    font-size: 50px
+    font-weight: normal
+    margin: 0 0 60px
+    text-align: center
+  .calc
+    width: 630px
+    margin: 0 auto 50px
+    &-item
+      display: flex
+      justify-content: space-between
+      margin-bottom: 20px
+      &-model
+        width: 390px
+        font-size: 18px
+        &-select
+          display: block
+          height: 60px
+          border: 2px solid #0688DB
+          border-radius: 4px
+          padding: 0 13px
+          select
+            width: 100%
+            height: 100%
+            background: transparent
+            border: none
+            color: #fff
+            font-size: 20px
+            padding-left: 18px
+            outline: none
+      &-amount
+        width: 150px
+        font-size: 18px
+        input
+          display: block
+          width: 100%
+          height: 60px
+          padding-left: 18px
+          border: 2px solid #0688DB
+          background: transparent
+          border-radius: 4px
+          font-size: 20px
+          color: #fff
+          outline: none
+          &.err
+            border-color: $err
+            color: $err
+    &-add
+      position: relative
+      width: 180px
+      height: 22px
+      color: #00CEFD
+      font-size: 14px
+      background: transparent
+      border: none
+      outline: none
+      transition: opacity .15s ease
+      cursor: pointer
+      &:hover
+        opacity: .8
+      &:before
+        content: ''
+        position: absolute
+        left: 0
+        text-align: left
+        padding-left: 28px
+        top: 0
+        width: 22px
+        height: 22px
+        background-image: image-url('icons/plus-bold.svg')
+        background-size: 22px
+        background-repeat: no-repeat
+  .form
+    margin: auto
+    display: block
+    width: 620px
+    display: flex
+    justify-content: space-between
+    input
+      width: 280px
+      height: 60px
+      border-radius: 3px
+      font-size: 20px
+      border: 1px solid #E0E0E0
+      padding-left: 18px
+      transition: border-color .2s ease
+      &.err
+        border-color: $err
+  button.apply
+    margin: 40px auto 0
+    width: 330px
+
+section#hotel
+  background: #fff
+  box-sizing: border-box
+  padding: 64px 0 64px
+  .cont
+    z-index: 2
+    position: relative
+    h2
+      font-size: 50px
+      font-weight: normal
+      text-align: center
+      position: relative
+      margin: 0 0 45px
+      color: #292929
+      &:after
+        position: absolute
+        content: ''
+        width: 100px
+        height: 8px
+        background: #E4E4E4
+        bottom: -29px
+        left: 0
+        right: 0
+        margin: auto
+    & > p
+      font-size: 28px
+      text-align: center
+      box-sizing: border-box
+      padding: 0 150px
+      font-weight: lighter
+      color: #292929
+    & > img
+      width: 600px
+      display: block
+      margin: auto
+  .desc
+    font-weight: lighter
+    width: 820px
+    margin: 40px auto
+    border-top: 1px solid #e6e6e6
+    border-bottom: 1px solid #e6e6e6
+    padding: 0 80px
+    box-sizing: border-box
+    p
+      font-size: 18px
+      line-height: 26px
+      margin: 36px 0
+      text-align: center
+  .hotel-icon
+    display: flex
+    margin: 40px 0
+    &-item
+      flex: 1
+      img
+        display: block
+        width: 120px
+        margin: 20px auto
+      h3
+        font-size: 18px
+        font-weight: bold
+        margin: 20px 0
+        text-align: center
+      &:not(:last-child)
+        margin-right: 40px
+  .title
+    font-size: 28px
+    font-weight: bold
+    margin: 60px 0 40px
+    text-align: center
+  button
+    margin: auto
+
+
+section#contacts
+  background: #1e2a34
+  box-sizing: border-box
+  padding: 80px 0
+  .cont
+    h2
+      text-align: center
+      font-size: 50px
+      color: #fff
+      margin: 0
+    .dash
+      width: 130px
+      height: 8px
+      margin: 20px auto 60px
+      background: #fff
+    & > p
+      font-weight: lighter
+      font-size: 24px
+      color: #fff
+      text-align: center
+      i
+        text-decoration: none
+        text-transform: none
+        font-style: initial
+        font-size: 18px
+      strong
+        font-weight: bold
+      a
+        text-decoration: none
+        color: #fff
+    .map
+      height: 250px
+      margin: 40px 0
+    .form
+      width: 580px
+      margin: auto
+      input
+        padding-left: 20px
+      input,
+      textarea
+        height: 60px
+        width: 100%
+        border-radius: 4px
+        color: #111
+        font-size: 19px
+        margin-bottom: 20px
+        display: block
+        border: none
+        box-sizing: border-box
+        &.err
+          border: 2px solid $err
+      &-inline
+        display: flex
+        justify-content: space-between
+        & > input
+          width: 280px
+      textarea
+        height: 120px
+        padding: 20px
+      button
+        margin: auto
+      p
+        margin: 20px 0
+        font-size: 12px
+        color: #b5b5b5
+        text-align: center
+        a
+          color: #11cdff
+          white-space: nowrap
+
+
+
+
+
+
+
+
+
+
+
 
 .controls
   margin: 140px 0 40px
@@ -118,6 +547,7 @@ input
   &-logo
     height: 34px
     display: flex
+    margin-right: 50px
     a
       display: flex
       height: 34px
@@ -133,6 +563,20 @@ input
       color: #CFFCFF
       text-shadow: 0 0 4px #91D3FF
       font-weight: 100
+  &-nav
+    display: flex
+    flex: 1
+    align-items: center
+    &-item
+      font-size: 14px
+      &:not(:last-child)
+        margin-right: 30px
+      a
+        color: #C4C4C4
+        transition: color .2s ease
+        &:hover
+          color: #fff
+          text-decoration: none
   &-controls
     display: flex
     align-items: center
@@ -313,3 +757,39 @@ input
     background: #515151
   &-submit
     background: #068BE0
+
+
+#errorbar
+  width: 100%
+  position: fixed
+  left: 0
+  right: 0
+  top: 0
+  transform: translateY(-110%)
+  background: $err
+  color: $white
+  transition: transform .2s ease
+  z-index: 900
+  line-height: 70px
+  p
+    margin: 0
+  &.opened
+    transform: translateY(0)
+
+#successbar
+  width: 100%
+  position: fixed
+  left: 0
+  right: 0
+  top: 0
+  transform: translateY(-110%)
+  background: rgb(49, 185, 111)
+  color: #fff
+  transition: transform .2s ease
+  z-index: 900
+  font-size: 20px
+  line-height: 70px
+  p
+    margin: 0
+  &.opened
+    transform: translateY(0)

@@ -1,3 +1,158 @@
-%h2 landing
-%p
-  login url = #{@login_url}
+%section#head
+  .bg-blur
+  .cont
+    .head
+      .head-miners
+        .head-miners-lay.head-miners-lay-1
+        .head-miners-lay.head-miners-lay-2
+        .head-miners-image.head-miners-image-1
+          = image_tag("miner_1.png")
+        .head-miners-image.head-miners-image-2
+          = image_tag("miner_2.png")
+        .head-miners-image.head-miners-image-3
+          = image_tag("miner_3.png")
+        .head-miners-image.head-miners-image-4
+          = image_tag("miner_4.png")
+      .head-content
+        %h1 Майнинг-отель для Asic Antminer №1 В РОССИИ
+        %h2 Специализированные дата-центры с уровнем <span>надежности TIER III</span>
+        %p Оставьте заявку и наш менеджер свяжется с Вами в ближайшее время
+        %button.apply.call-popup Оставить заявку
+
+%section#features
+  .cont
+    %h2 Размещение
+    %p В чем выгода и удобства размещения оборудования в дата-центре?
+    .features
+      .features-item
+        .features-item-count 1
+        .features-item-text
+          Вам не нужно заботиться о перебоях в подаче электричества, нехватке мощностей и увеличением стоимости на электроэнергию. Наш дата центр обеспечит бесперебойную подачу требуемых мощностей, стабилизированное напряжение и мониторинг физических параметров 24/7 по фиксированной цене
+      .features-item
+        .features-item-count 2
+        .features-item-text
+          Вам не нужно заботиться о перебоях в подаче электричества, нехватке мощностей и увеличением стоимости на электроэнергию. Наш дата центр обеспечит бесперебойную подачу требуемых мощностей, стабилизированное напряжение и мониторинг физических параметров 24/7 по фиксированной цене
+      .features-item
+        .features-item-count 3
+        .features-item-text
+          Вам не нужно заботиться о перебоях в подаче электричества, нехватке мощностей и увеличением стоимости на электроэнергию. Наш дата центр обеспечит бесперебойную подачу требуемых мощностей, стабилизированное напряжение и мониторинг физических параметров 24/7 по фиксированной цене
+      .features-item
+        .features-item-count 4
+        .features-item-text
+          Вам не нужно заботиться о перебоях в подаче электричества, нехватке мощностей и увеличением стоимости на электроэнергию. Наш дата центр обеспечит бесперебойную подачу требуемых мощностей, стабилизированное напряжение и мониторинг физических параметров 24/7 по фиксированной цене
+      .features-item
+        .features-item-count 5
+        .features-item-text
+          Вам не нужно заботиться о перебоях в подаче электричества, нехватке мощностей и увеличением стоимости на электроэнергию. Наш дата центр обеспечит бесперебойную подачу требуемых мощностей, стабилизированное напряжение и мониторинг физических параметров 24/7 по фиксированной цене
+      .features-item
+        .features-item-count 6
+        .features-item-text
+          Вам не нужно заботиться о перебоях в подаче электричества, нехватке мощностей и увеличением стоимости на электроэнергию. Наш дата центр обеспечит бесперебойную подачу требуемых мощностей, стабилизированное напряжение и мониторинг физических параметров 24/7 по фиксированной цене
+    %button.apply.call-popup Оставить заявку
+
+%section#steps
+  .cont
+    %h2 Этапы подключения
+    .steps
+      .steps-item
+        .steps-item-icon
+          = image_tag("icons/handshake.svg")
+        .steps-item-text
+          Заключаем договор и принимаем оборудование на ответственное хранение
+      .steps-item
+        .steps-item-icon
+          = image_tag("icons/miner_hole.svg")
+        .steps-item-text
+          В течение 5 рабочих дней размещаем, подключаем и настраиваем Ваше оборудование на максимальную доходность
+      .steps-item
+        .steps-item-icon
+          = image_tag("icons/chart.svg")
+        .steps-item-text
+          Обеспечиваем стабильную бесперебойную работу майнеров на оптимальных условиях
+
+
+%section#calc
+  .cont
+    %h2 Узнайте стоимость размещения
+    #calc-component
+    .form
+      %input{:name => "name", :placeholder => "Ваше имя", :type => "text"}
+      %input{:name => "phone", :placeholder => "Ваш телефон", :type => "text"}
+    %button.apply#select-machine Разместить оборудование
+
+
+%section#hotel
+  .cont
+    %h2 Майнинг-отель
+    %p Размещайте свое оборудование в наших дата-центрах с уровнем надёжности Tier III
+    .desc
+      %p Для долгосрочной и бесперебойной работы оборудования в закрытом помещении должны быть созданы специальные условия, которые мы возложили на свои плечи.
+      %p Мы предлагаем вам забыть о проблемах, возникающих в ходе эксплуатации оборудования для майнинга и обеспечиваем всеми необходимыми условиями:
+    .hotel-icon
+      .hotel-icon-item
+        = image_tag("icons/temp.svg")
+        %h3 Температурный контроль
+      .hotel-icon-item
+        = image_tag("icons/vent.svg")
+        %h3 Приточно-вытяжная вентиляция с фильтрацией
+      .hotel-icon-item
+        = image_tag("icons/parameters.svg")
+        %h3 Постоянный мониторинг физических параметров
+    = image_tag("icons/hotel.svg")
+    .hotel-icon.reverse
+      .hotel-icon-item
+        %h3 Стабилизированное напряжение
+        = image_tag("icons/energy.svg")
+      .hotel-icon-item
+        %h3 Обновление ПО asic-майнеров
+        = image_tag("icons/re.svg")
+      .hotel-icon-item
+        %h3 Охрана оборудования
+        = image_tag("icons/guard.svg")
+    -# .title Стоимость размещения - всего 20% ваших мощностей
+    %button.apply.call-popup Оформить заявку
+
+%section#contacts
+  .cont
+    %h2 Контакты
+    .dash
+    %p.sub-title Пресненская набережная 6, строение 2, Башня "Империя", эт. 38 (10:00-20:00)
+    %p.sub-title
+      %strong
+        %a{:href => "tel: +7 (916) 012-77-21"}
+          +7 (916) 012-77-21
+      %i 24 часа / 7 дней в неделю
+    .map
+      <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A27a092387100be2d24d8347e151281c5da1300757f58e2ccbb795b437c8fea68&amp;source=constructor" width="100%" height="250" frameborder="0"></iframe>
+    .form
+      %form{:action => "/", :method => "get"}
+        %input{:name => "name", :placeholder => "Ваше имя", :type => "text"}/
+        .form-inline
+          %input{:name => "phone", :placeholder => "Ваш телефон", :type => "tel"}/
+          %input{:name => "email", :placeholder => "Ваше email", :type => "email"}/
+        %textarea{:name => "comment", :placeholder => "Ваше сообщение"}
+        %button.apply#feedback{:form => "contact-form", :type => "submit"} Отправить
+        -# %p
+        -#   = t('first.desc2').html_safe
+
+.paranja.hidden
+.pp.hidden
+  .pp-close ✕
+  %h1 Оставьте заявку
+  %p Мы вам перезвоним в ближайшее время
+  .form
+    %input{:name => "name", :placeholder => "Ваше имя", :type => "text"}
+    %input{:name => "phone", :placeholder => "Ваш телефон", :type => "tel"}
+  %button.apply.call-me Отправить
+
+#errorbar
+  .cont
+#successbar
+  .cont
+-# #errorbar{"data-err-phone" => t('errors.phone'), "data-err-name" => t('errors.name'), "data-err-email" => t('errors.email')}
+-#   .cont
+-# #successbar{"data-suc-callme" => t('success.callme'), "data-suc-buy" => t('success.buy'), "data-suc-feedback" => t('success.feedback')}
+-#   .cont
+
+
+= javascript_pack_tag('landing')

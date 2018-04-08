@@ -24,15 +24,40 @@
     max-width: 90% !important
   .header-controls-email
     display: none
+  section#hotel
+    .cont p
+      padding: 0
+    .desc
+      width: 100%
+      padding: 0 !important
 
 // // ===========================================
 @media (max-width: 690px)
   .cont
     width: 600px
+  section#hotel
+    .hotel-icon
+      display: block
+      &-item
+        margin: 0 0 30px
+        display: flex
+        align-items: center
+        img
+          width: 60px
+          margin: 0 40px 0 0
+        h3
+          flex: 1
+          text-align: left
+    .reverse img
+        order: 1
+    .reverse h3
+        order: 2
+    .container > img
+      width: 80%
 
-// @media (max-width: 590px)
-//   .cont
-//     width: 100%
-//     padding-left: 5px
-//     padding-right: 5px
-//     box-sizing: border-box
+@media (max-width: 590px)
+  .cont
+    width: 100%
+    padding-left: 10px
+    padding-right: 10px
+    box-sizing: border-box

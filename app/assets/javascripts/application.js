@@ -1,3 +1,9 @@
+//= require lib
+//= require scrollto
+//= require popup
+//= require forms
+
+
 /*
 Unobtrusive JavaScript
 https://github.com/rails/rails/blob/master/actionview/app/assets/javascripts
