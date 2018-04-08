@@ -72,16 +72,16 @@ export default class MachineListItem extends Component {
         <td>
           {machine.time}
         </td>
+        <td>
+          {machine.blocks_count}
+        </td>
         <th>
         </th>
         <th>
         </th>
         <th>
           <div className="machines-action">
-            <i className="fa fa-cog" aria-hidden="true" onClick={editConfig}></i>
-          </div>
-          <div className="machines-action">
-            <i className="fa fa-pencil" onClick={editMachine}></i>
+            <i className="fa fa-cog" onClick={editConfig}></i>
           </div>
           <div className="machines-action">
             <i className="fa fa-area-chart" aria-hidden="true" onClick={this.tooglePopup}></i>

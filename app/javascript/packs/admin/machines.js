@@ -18,7 +18,8 @@ export default class Machines extends Component {
       selected: [],
       filter: {
         model: null,
-        user_id: null
+        user_id: null,
+        sort: 'status'
       },
       selectedMachines: [],
       rebootedMachines: [],
@@ -84,6 +85,36 @@ export default class Machines extends Component {
       if (filter[key] && key == 'user_id' && filter[key] != 'все') {
         filtred = filtred.filter(m => m.user_id == filter[key])
       }
+    }
+
+    if (filter.sort == 'status') {
+      filtred = filtred.sort((a, b) => {
+        if (a.active === b.active) {
+          return a.id > b.id ? -1 : 1;
+        } else {
+          if (a.active && !b.active) {
+            return 1;
+          } else {
+            return -1;
+          }
+        }
+      })
+    }
+    if (filter.sort == 'place') {
+      filtred = filtred.sort((x, y) => {
+        const xSum = parseInt(x.place.split('-').map(a => parseInt(a)).join(''));
+        const ySum = parseInt(y.place.split('-').map(a => parseInt(a)).join(''));
+        return xSum < ySum ? -1 : 1
+      });
+    }
+    if (filter.sort == 'blocks') {
+      filtred = filtred.sort((x, y) => {
+        const xSum = x.blocks_count;
+        const ySum = y.blocks_count;
+        if (xSum == ySum) {
+          return x.id > y.id ? -1 : 1;
+        } else return xSum > ySum ? -1 : 1;
+      });
     }
     return filtred;
   }
@@ -159,6 +190,16 @@ export default class Machines extends Component {
     }
   }
 
+  changeSortHanlder = (e) => {
+    const {value} = e.target;
+    this.setState({
+      filter: {
+        ...this.state.fitler,
+        sort: value
+      }
+    })
+  }
+
   changeSearchHanlder = (e) => {
     const {name, value} = e.target;
     const {filter} = this.state;
@@ -183,7 +224,6 @@ export default class Machines extends Component {
       <div className="container">
         <div className="cont">
           <div className="controls">
-            <h1>Майнеры</h1>
             <div className="select">
               <label>модель</label>
               <select value={filter.model} name="model" className="form-control" onChange={this.changeSearchHanlder}>
@@ -201,6 +241,14 @@ export default class Machines extends Component {
                  {users.map(u => (
                    <option key={u.id} value={u.id}>{u.id + ':' + u.email}</option>
                  ))}
+              </select>
+            </div>
+            <div className="select">
+              <label> сортировка</label>
+              <select value={filter.sort} className="form-control" name="user_id" onChange={this.changeSortHanlder}>
+                <option value="status">по статусу</option>
+                <option value="place">по месту</option>
+                <option value="blocks">по блокам</option>
               </select>
             </div>
             {selected && selected.length > 0 && (
@@ -243,6 +291,9 @@ export default class Machines extends Component {
               </th>
               <th className="label">
                 обновление
+              </th>
+              <th className="label">
+                блоки
               </th>
               <th>
               </th>
