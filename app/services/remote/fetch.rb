@@ -12,7 +12,7 @@ class Remote::Fetch
       begin
         machines = JSON.parse(RestClient.get(url).body)
       rescue
-        place.error!
+        place_error!(place)
         next
       end
       clear(place, machines)
@@ -29,6 +29,10 @@ class Remote::Fetch
     actual_ids = machines.map {|m| m["id"]}
     not_actual_machines = place.machines.where.not(system_id: actual_ids)
     not_actual_machines.destroy_all
+  end
+
+  def place_error!(place)
+    place.error!
   end
 
   def place_ok!(place)

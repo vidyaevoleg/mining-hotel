@@ -23,7 +23,7 @@ module Machines
     end
 
     def to_model
-      template
+      template.reload
     end
 
   end
