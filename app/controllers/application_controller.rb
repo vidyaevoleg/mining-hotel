@@ -10,6 +10,12 @@ class ApplicationController < ActionController::Base
     ActiveModel::Serializer::CollectionSerializer
   end
 
+  protected
+
+  def after_sign_in_path_for(resource)
+    '/home'
+  end
+
   def set_blanc_values_to_nil!(prms)
     prms.keys.each do |key|
       val = prms[key]

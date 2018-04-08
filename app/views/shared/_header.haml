@@ -1,17 +1,33 @@
 .header
   .cont
     .header-logo
-      %a{href: @head_path}
+      %a{href: '/'}
         = image_tag('logo.svg')
         .header-logo-hotel
           hotel
+    - if !current_user
+      .header-nav
+        .header-nav-item
+          %a{href: '/#features', "data-to" => "features"} Выгода
+        .header-nav-item
+          %a{href: '/#calc', "data-to" => "calc"} Расчет стоимости
+        .header-nav-item
+          %a{href: '#steps', "data-to" => "steps"} Этапы
     .header-controls
       - if current_user
         .header-controls-email
           = current_user.email
+        - if request.url.include?('home') || request.url.include?('places/')
+          .header-controls-templates
+            %a{href: '#', id: 'js-templates'}
+              ШАБЛОНЫ
         .header-controls-templates
-          %a{href: '#', id: 'js-templates'}
-            ШАБЛОНЫ
+          %a{href: '/home'}
+            МАШИНЫ
         .header-controls-logout
           %a{href: '/users/sign_out'}
             ВЫЙТИ
+      - else
+        .header-controls-logout
+          %a{href: '/users/sign_in'}
+            Войти
