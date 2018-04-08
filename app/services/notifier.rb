@@ -6,7 +6,7 @@ class Notifier
       write("Асик #{machine.model} на месте '#{machine.place}' отель #{machine.hotel.name} не работает")
     end
 
-    def turn_on
+    def turn_on(machine)
       write("Асик #{machine.model} на месте '#{machine.place}' отель #{machine.hotel.name} вернулся в строй")
     end
 

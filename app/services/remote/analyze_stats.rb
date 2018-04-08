@@ -10,14 +10,14 @@ class Remote::AnalyzeStats
   end
 
   def call
-    stats = machine.stats.order(id: :desc).limit(4).to_a.reverse
-    last_3_active = !stats.last(3).map(&:active).include?(false)
-    last_3_not_active = !last_3_active
+    stats = machine.stats.order(id: :desc).limit(6).to_a.reverse
+    last_5_active = !stats.last(5).map(&:active).include?(false)
+    last_5_not_active = !last_5_active
 
-    if last_3_not_active && stats.first.active
+    if last_5_not_active && stats.first.active
       # machine turned off
       Notifier.shut_down(machine)
-    elsif last_3_active && !stats.first.active
+    elsif last_5_active && !stats.first.active
       # machine turned on
       Notifier.turn_on(machine)
     end
