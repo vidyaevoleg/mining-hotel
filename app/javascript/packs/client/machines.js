@@ -129,11 +129,14 @@ export default class Machines extends Component {
         }
       })
     }
-    document.getElementById("js-templates").addEventListener("click", () => {
-      this.setState({
-        editedTemplate: true
+    const elem = document.getElementById("js-templates")
+    if (elem) {
+      elem.addEventListener("click", () => {
+        this.setState({
+          editedTemplate: true
+        })
       })
-    })
+    }
   }
 
   chooseAll = (e) => {
