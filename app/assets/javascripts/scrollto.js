@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // initial scroll
   if (window.location.hash) {
     const target = window.location.hash.replace('#', '');
-    if (['features', 'calc', 'steps'].includes(target)) {
+    if (['features', 'calc', 'steps', 'lk'].includes(target)) {
       const domTarget = z('section#' + target);
       if (domTarget) {
         smoothScrollTo(

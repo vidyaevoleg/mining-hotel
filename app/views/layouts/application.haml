@@ -3,8 +3,10 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title Miningup Hotel
-    -# %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no", :name => "viewport"}/
-    %meta{content: "width=690", :name => "viewport"}/
+    - if request.url.include?('home') || request.url.include?('places/') || request.url.include?('users/')
+      %meta{content: "width=690", :name => "viewport"}/
+    - else
+      %meta{content: "width=525", :name => "viewport"}/
     %link{:href => "#{image_url('fav.png')}", :rel => "icon", :sizes => "16x16", :type => "image/png"}/
     %link{:href => "#{image_url('fav/ios_57px.png')}", :rel => "apple-touch-icon", :sizes => "57x57"}/
     %link{:href => "#{image_url('fav/ios_60px.png')}", :rel => "apple-touch-icon", :sizes => "60x60"}/
