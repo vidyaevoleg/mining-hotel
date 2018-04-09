@@ -10,10 +10,10 @@ class Remote::AnalyzeStats
   end
 
   def call
+    return if machine.hotel.error?
     stats = machine.stats.order(id: :desc).limit(6).to_a.reverse
     last_5_active = !stats.last(5).map(&:active).include?(false)
     last_5_not_active = !last_5_active
-
     if last_5_not_active && stats.first.active
       # machine turned off
       Notifier.shut_down(machine)
