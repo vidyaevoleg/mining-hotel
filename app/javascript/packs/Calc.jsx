@@ -4,13 +4,16 @@ import {debounce} from 'lodash';
 const MODELS = [
   {
     id: 's9',
-    name: 'Antminer S9'
+    name: 'Antminer Bitmain S9'
   }, {
-    id: 's3',
-    name: 'Bitman S3'
+    id: 'l3',
+    name: 'Antminer Bitmain L3+'
   }, {
-    id: 'l1',
-    name: 'Antminer L1'
+    id: 'm3',
+    name: 'Antminer Whatsminer M3'
+  }, {
+    id: 'd3',
+    name: 'Antminer Bitmain D3'
   }
 ]
 

@@ -111,7 +111,7 @@ function onServerError(res, form) {
 }
 
 // CALL ME
-z('.pp .call-me').on('click', ev => {
+z('.pp .call-me') && z('.pp .call-me').on('click', ev => {
   ev.preventDefault();
   const form = ev.target.parentElement;
   const name = z('.pp input[name="name"]').value;
@@ -145,7 +145,7 @@ z('.pp .call-me').on('click', ev => {
 });
 
 // FEEDBACK
-z('button#feedback').on('click', ev => {
+z('button#feedback') && z('button#feedback').on('click', ev => {
   ev.preventDefault();
   const form = z('section#contacts form');
   const name = form.querySelector('input[name="name"]').value;
@@ -185,7 +185,7 @@ z('button#feedback').on('click', ev => {
 
 
 // SELECT MACHINE
-z('button#select-machine').on('click', ev => {
+z('button#select-machine') && z('button#select-machine').on('click', ev => {
   ev.preventDefault();
   const form = z('section#calc .form');
   const name = form.querySelector('input[name="name"]').value;
