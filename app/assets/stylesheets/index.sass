@@ -166,6 +166,48 @@ section#features
   button
     margin: auto
 
+section#lk
+  padding: 70px 0 90px
+  background: #EFEFEF
+  h2
+    font-size: 50px
+    font-weight: normal
+    text-align: center
+    position: relative
+    margin: 0 0 45px
+    color: #292929
+    &:after
+      position: absolute
+      content: ''
+      width: 100px
+      height: 8px
+      background: #E4E4E4
+      bottom: -29px
+      left: 0
+      right: 0
+      margin: auto
+  p
+    color: #292929
+    font-weight: normal
+    font-size: 28px
+    margin: 0 0 62px
+    text-align: center
+  .lk
+    display: flex
+    justify-content: center
+    &-item
+      width: 238px
+      &:not(:last-child)
+        margin-right: 23px
+      &-image
+        margin-bottom: 34px
+        img
+          display: block
+      &-text
+        font-size: 18px
+        color: #292929
+        text-align: center
+
 section#steps
   background-color: #6AC5FF
   background-image: image-url('btc_bg.png')
@@ -602,6 +644,26 @@ section#contacts
           background: #575757
           color: #fff
           text-decoration: none
+
+.footer
+  margin: 80px 0 40px
+  .cont
+    display: flex
+    align-items: center
+    justify-content: space-between
+  .social
+    display: flex
+    &-item
+      width: 30px
+      height: 30px
+      svg
+        width: 30px
+        height: 30px
+        fill: #B5B4B4
+      path
+        fill: #B5B4B4
+      &:not(:last-child)
+        margin-right: 12px
 
 .login
   padding-top: 120px

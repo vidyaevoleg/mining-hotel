@@ -1,3 +1,16 @@
+@media (max-width: 1330px)
+  // .cont
+  //   width: 860px
+  section#lk
+    .lk
+      flex-wrap: wrap
+      justify-content: space-around
+      &-item
+        margin-bottom: 40px
+        &:not(:last-child)
+          margin-right: 0
+
+
 @media (max-width: 990px)
   .cont
     width: 860px
@@ -6,6 +19,11 @@
 @media (max-width: 890px)
   .cont
     width: 760px
+  section#head
+    h1
+      font-size: 32px
+    h2
+      font-size: 24px
   .t-col
     &:not(:last-child)
       margin-right: 10px
@@ -16,6 +34,13 @@
 @media (max-width: 790px)
   .cont
     width: 660px
+  section#head
+    .head
+      &-miners
+        transform: scale(0.75)
+  section#lk
+    h2
+      padding: 0 40px
   .t-col-info
     display: none !important
   .t-col-temp
@@ -35,6 +60,31 @@
 @media (max-width: 690px)
   .cont
     width: 600px
+  .header
+    &-nav
+      display: none
+  section#head
+    .cont
+      background-image: none
+    .head
+      display: block
+      text-align: center
+      &-miners
+        margin: 0 auto 30px
+        transform: scale(1)
+    button.apply
+      margin: auto
+  section#features
+    .features
+      &-item
+        width: 47%
+  section#steps
+    .steps
+      padding: 0
+  section#calc
+    .calc,
+    .form
+      width: 600px
   section#hotel
     .hotel-icon
       display: block
@@ -54,6 +104,17 @@
         order: 2
     .container > img
       width: 80%
+  section#contacts
+    .form
+      width: 100% !important
+      &-inline
+        display: block !important
+        input
+          width: 100% !important
+          margin: 0 0 20px !important
+        &-phone
+          width: 100% !important
+          margin: 0 !important
 
 @media (max-width: 590px)
   .cont
@@ -61,3 +122,27 @@
     padding-left: 10px
     padding-right: 10px
     box-sizing: border-box
+  section#features
+    .features
+      display: block
+      &-item
+        width: 100%
+        &-text
+          font-size: 18px
+  section#hotel
+    .cont > img
+      width: 100%
+  section#calc
+    .calc,
+    .form
+      width: 100%
+      flex-wrap: wrap
+      input
+        width: 100%
+        &:first-child
+          margin-bottom: 20px
+    .calc-item-model
+      margin-right: 20px
+  .header
+    &-controls-logout
+      font-size: 18px
