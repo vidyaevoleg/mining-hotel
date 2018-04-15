@@ -24,7 +24,7 @@ export default class Machines extends Component {
       selectedMachines: [],
       rebootedMachines: [],
       selectedMachine: null,
-      editedTemplate: null,
+      selectedTemplate: null,
       newConfig: null,
       models: _.uniq(gon.machines.map(m => m.model))
     }
@@ -53,7 +53,7 @@ export default class Machines extends Component {
     if (elem) {
       elem.addEventListener("click", () => {
         this.setState({
-          editedTemplate: true
+          selectedTemplate: true
         })
       })
     }
@@ -167,7 +167,7 @@ export default class Machines extends Component {
       selectedMachine: null,
       selectedTemplate: null,
       newConfig: null,
-      editedTemplate: null,
+      selectedTemplate: null,
       rebootedMachines: []
     })
   }
@@ -219,7 +219,7 @@ export default class Machines extends Component {
     const {
       templates, selected, models, filter,
       selectedMachine, selectedMachines,
-      rebootedMachines, editedTemplate, users
+      rebootedMachines, selectedTemplate, users
     } = this.state;
     const machines = this.filterMachines();
 
@@ -328,7 +328,7 @@ export default class Machines extends Component {
             <RebootingProgress toogle={this.tooglePopup} ids={rebootedMachines}/>
           }
           {
-            editedTemplate &&
+            selectedTemplate &&
               <TemplatesPopup templates={templates} toogle={this.tooglePopup} onSuccess={this.saveTemplateSuccess}/>
           }
         </div>
