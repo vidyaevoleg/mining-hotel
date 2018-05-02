@@ -20,7 +20,6 @@ class Remote::AnalyzeStats
       Notifier.shut_down(machine) if stats.last.created_at > 10.minutes.ago
     elsif last_5_active && !stats.first.active
       # machine turned on
-      byebug
       Notifier.turn_on(machine) if stats.last.created_at > 10.minutes.ago
     end
   end
