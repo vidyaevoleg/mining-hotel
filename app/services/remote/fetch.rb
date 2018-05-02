@@ -9,6 +9,7 @@ class Remote::Fetch
   def call
     Place.find_each do |place|
       url = "#{place.url}/api/machines"
+      puts place.name
       begin
         machines = JSON.parse(RestClient.get(url).body)
       rescue
