@@ -30,7 +30,7 @@ class Remote::SaveStat
   end
 
   def analyze_stats
-    Remote::AnalyzeStats.call(machine.reload)
+    AnalyzerJob.perform_later(machine.id)
   end
 
   def save_blocks
