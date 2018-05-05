@@ -17,7 +17,7 @@ export default class MachineListItem extends Component {
   }
 
   render () {
-    const {machine, onChoose, chosen, editMachine, editConfig} = this.props;
+    const {machine, onChoose, chosen, editConfig} = this.props;
     const {popup} = this.state;
     const user = gon.users.find(u => u.id == machine.user_id);
 

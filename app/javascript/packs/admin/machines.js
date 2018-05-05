@@ -174,12 +174,6 @@ export default class Machines extends Component {
 
   editConfigHandler = (machine) => {
     this.setState({
-      selectedTemplate: machine
-    })
-  }
-
-  editMachineHandler = (machine) => {
-    this.setState({
       selectedMachine: machine
     })
   }
@@ -311,7 +305,6 @@ export default class Machines extends Component {
                     onChoose={() => {this.chooseMachineHandler(m.id)}}
                     chosen={chosen}
                     editConfig={() => this.editConfigHandler(m)}
-                    editMachine={() => this.editMachineHandler(m)}
                   />
                 })
               }
