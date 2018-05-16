@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   end
   resources :places, only: [:show]
   namespace :api, defaults: {format: :json} do
-    resources :templates
+    resources :templates do
+      get :current, on: :collection
+    end
     resources :machines do
       get :stats, on: :member
       put :update_template, on: :member
@@ -17,6 +19,4 @@ Rails.application.routes.draw do
       post :save_template, on: :collection
     end
   end
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

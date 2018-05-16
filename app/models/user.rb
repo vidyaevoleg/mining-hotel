@@ -5,7 +5,6 @@ class User < ApplicationRecord
   enum role: {regular: 0, admin: 1}
   has_many :templates
   has_many :machines
-
-
+  serialize :black_list, Array
   # validates_confirmation_of :password, unless: :new_record?
 end

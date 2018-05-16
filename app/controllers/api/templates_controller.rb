@@ -1,7 +1,15 @@
 module Api
   class TemplatesController < ::Api::ApplicationController
+    skip_before_action :authenticate_user!, only: :current
+    
     def index
       templates = current_user.templates
+      respond_with templates, each_serializer: TemplateSerializer
+    end
+
+    def current
+      user = User.find_by(email: 'admin@nextblock.ru')
+      templates = user.templates
       respond_with templates, each_serializer: TemplateSerializer
     end
 
