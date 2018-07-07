@@ -18,7 +18,7 @@ module Machines
       params = {template: inputs.except(:machine)}
       url = "#{place.url}/api/machines/#{machine.system_id}/update_template"
       begin
-        RestClient.put(url, params)
+        RestClient.put(url, params, {user: 'hotel'})
       rescue
         errors.add(:machine, "#{machine.id} не отвечает" )
       end
