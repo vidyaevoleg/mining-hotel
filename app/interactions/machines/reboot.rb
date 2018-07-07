@@ -9,7 +9,7 @@ module Machines
     def execute
       url = "#{place.url}/api/machines/#{machine.system_id}/reboot"
       begin
-        RestClient.put(url, {})
+        RestClient.put(url, {}, {user: 'hotel'})
       rescue
         errors.add(:machine, "#{machine.id} не отвечает")
       end
