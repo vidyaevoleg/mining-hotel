@@ -1,4 +1,4 @@
-every 3.minutes do
+every 10.minutes do
   rake "stats:fetch"
 end
 
